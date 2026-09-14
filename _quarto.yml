@@ -4,6 +4,9 @@ project:
 
   resources:
     - LICENSES/*.txt
+    - "!_publish/**"
+    - "!release/**"
+    - "!_outputs/**"    
 
 profile:
   default: html
