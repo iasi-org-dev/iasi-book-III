@@ -1,0 +1,142 @@
+---
+title: "Contenido y metadatos"
+navbar-title: "Contenido y metadatos"
+---
+
+IASI distingue entre **lo que dice un artefacto** y **lo que ese artefacto significa metodológicamente**.
+
+Esta distinción es fundamental.
+
+## Dos preguntas diferentes
+
+El contenido responde a:
+
+> ¿Qué dice esto?
+
+Los metadatos responden a:
+
+> ¿Qué es esto y cómo debe tratarse?
+
+Consideremos dos ficheros que contienen exactamente el mismo Markdown:
+
+``` markdown
+# Política de contraseñas
+
+Las contraseñas deben contener al menos catorce caracteres.
+```
+
+Sintácticamente, ambos ficheros son idénticos.
+
+Metodológicamente, pueden ser completamente distintos.
+
+Uno puede ser un requisito de seguridad asumido internamente. Otro puede ser una cita de una norma externa. Un tercero puede haber sido generado a partir de una base de datos de políticas. Un cuarto puede ser una copia temporal de trabajo.
+
+El contenido textual, por sí solo, no permite a IASI saber cómo debe tratar cada caso.
+
+## La sintaxis no es la semántica
+
+El formato de fichero no determina su significado metodológico.
+
+Un fichero `.md` no es automáticamente `Authored`.  
+Un PDF descargado no es automáticamente autoritativo.  
+Un fichero generado no adquiere autoridad por el mero hecho de existir en un repositorio.  
+Una copia local de un documento externo no transfiere su autoridad al proyecto local.
+
+IASI necesita, por tanto, semántica más allá de la sintaxis.
+
+## Los metadatos como semántica metodológica
+
+Los metadatos pueden expresar propiedades como:
+
+- origen;
+- autoridad;
+- procedencia;
+- ciclo de vida;
+- estado;
+- versión;
+- vigencia;
+- relaciones;
+- dependencias;
+- historial de transformaciones;
+- estado de revisión;
+- estado de adopción.
+
+El esquema exacto puede evolucionar, pero la separación entre contenido y metadatos debe permanecer estable.
+
+## El front matter es un mecanismo de representación
+
+El front matter es una forma física cómoda de asociar metadatos a contenido textual.
+
+**No es el modelo conceptual.**
+
+Por ejemplo:
+
+``` text
++++
+origin = "external"
+authority = "external"
+status = "current"
++++
+
+# Contenido de ejemplo
+
+...
+```
+
+Los conceptos metodológicos seguirían existiendo si los metadatos estuvieran almacenados en una base de datos, un fichero lateral, un grafo, una API o un contenedor binario.
+
+IASI define primero la semántica y después su serialización.
+
+## Por qué importa para los Sistemas Inteligentes
+
+Un Sistema Inteligente puede leer texto y generar texto plausible. Eso no basta para hacer ingeniería.
+
+También debe poder distinguir:
+
+- hechos de inferencias;
+- autoridad de sugerencia;
+- fuente de resultado generado;
+- conocimiento durable de contexto temporal;
+- restricción externa de decisión interna.
+
+Sin metadatos, todo el texto tiende a aplanarse dentro de un mismo contexto indiferenciado.
+
+Y con ello se pierde significado de ingeniería.
+
+## El mismo contenido puede requerir tratamientos distintos
+
+Supongamos que la siguiente frase aparece en varios artefactos:
+
+> El servicio conservará los logs de auditoría durante 365 días.
+
+Puede ser:
+
+1. **External**: copiada de una regulación.
+2. **Authored**: adoptada como requisito interno.
+3. **Inferred**: deducida por un Sistema Inteligente a partir de varias declaraciones de cumplimiento.
+4. **Derived**: materializada dentro de una matriz de cumplimiento generada.
+5. **Ephemeral**: presente en una nota temporal de análisis.
+
+La frase es idéntica.
+
+Su significado de ingeniería no lo es.
+
+## El contenido no debe ocultar metodología
+
+Un fallo recurrente consiste en codificar estado metodológico de forma informal dentro de la prosa:
+
+``` markdown
+NOTA: esto viene del cliente y probablemente no debería modificarse.
+```
+
+La información es valiosa, pero no es fiable como dato procesable por una máquina.
+
+IASI debe preferir metadatos explícitos para las propiedades que afecten al procesamiento, la autoridad, la validación o el ciclo de vida.
+
+La explicación legible por personas puede complementar a los metadatos, pero no sustituirlos.
+
+## Principio
+
+**El contenido transporta conocimiento. Los metadatos transportan semántica metodológica.**
+
+Ambos cooperan, pero siguen siendo planos distintos.

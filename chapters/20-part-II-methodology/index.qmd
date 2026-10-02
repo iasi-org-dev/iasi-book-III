@@ -3,9 +3,27 @@ title: "La metodología"
 navbar-title: "Metodología"
 ---
 
-La metodología IASI organiza el paso desde información heterogénea hasta resultados aceptados.
+La metodología IASI organiza cómo se representa el conocimiento de ingeniería y cómo ese conocimiento se transforma en trabajo y resultados aceptados.
 
-Su secuencia canónica puede representarse así:
+Esta parte se divide en dos planos relacionados.
+
+El primero define el **modelo semántico**: qué es un artefacto, qué diferencia existe entre contenido y metadatos, cómo se representan autoridad y procedencia, y cómo se relacionan las fuentes con sus materializaciones.
+
+```text
+conceptos
+   ↓
+contenido + metadatos
+   ↓
+naturaleza de los artefactos
+   ↓
+autoridad + procedencia
+   ↓
+artefacto fuente IASI
+   ↓
+materialización
+```
+
+El segundo describe el **ciclo metodológico de trabajo**, desde la información de entrada hasta la aceptación del resultado:
 
 ```text
 inputs
@@ -23,8 +41,10 @@ validations
 acceptance + states
 ```
 
-Esta representación no describe una cascada irreversible.
+No son dos metodologías distintas.
 
-El proceso es iterativo. Una task puede descubrir nueva información; una validation puede revelar que una definition era incompleta; un nuevo input puede afectar specifications ya existentes. IASI conserva esas relaciones para poder volver atrás sin perder la historia.
+El modelo semántico establece **qué significa** la información y cómo debe tratarse. El ciclo metodológico establece **cómo progresa** esa información dentro del trabajo de ingeniería.
 
-Los capítulos de esta parte describen cada elemento por su responsabilidad dentro del ciclo.
+Tampoco se trata de una cascada irreversible. Una task puede descubrir nueva información; una validation puede revelar que una definition era incompleta; un nuevo input puede afectar a specifications ya existentes. IASI conserva las relaciones necesarias para volver atrás sin perder la historia ni confundir autoridad, procedencia y estado.
+
+Los capítulos de esta parte desarrollan primero la semántica y después el ciclo operativo construido sobre ella.

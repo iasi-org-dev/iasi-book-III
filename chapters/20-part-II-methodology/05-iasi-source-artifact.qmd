@@ -1,0 +1,138 @@
+---
+title: "Artefacto fuente IASI"
+navbar-title: "Artefacto fuente IASI"
+---
+
+IASI necesita una representación fuente capaz de transportar tanto contenido legible por personas como semántica metodológica.
+
+La propuesta inicial es el artefacto `.iasi`.
+
+## La extensión `.iasi`
+
+Un fichero `.iasi` es un artefacto fuente IASI.
+
+No es simplemente Markdown con otra extensión.
+
+Su significado procede de la metodología IASI y del contrato definido para el formato.
+
+La representación inicial combina:
+
+1. front matter TOML para los metadatos metodológicos;
+2. contenido Markdown para el conocimiento legible por personas.
+
+Conceptualmente:
+
+```text
++---------------------------+
+| metadatos TOML            |
+| "¿Qué es esto?"           |
+| "¿Cómo debe tratarse?"    |
++---------------------------+
+| contenido Markdown        |
+| "¿Qué dice esto?"         |
++---------------------------+
+```
+
+## Forma física inicial
+
+Un ejemplo mínimo podría ser:
+
+``` text
++++
+title = "Requisitos de autenticación"
+status = "draft"
++++
+
+# Requisitos de autenticación
+
+El servicio deberá...
+```
+
+Este capítulo no congela deliberadamente el esquema exacto de metadatos.
+
+IASI debe definir primero el modelo conceptual.
+
+La serialización viene después.
+
+## Por qué TOML
+
+IASI utiliza TOML para configuración y metadatos estructurados mantenidos por personas, salvo que un caso de uso concreto requiera otra representación.
+
+TOML proporciona una representación explícita y legible sin convertir YAML en parte del contrato central de IASI.
+
+## Por qué Markdown
+
+Markdown proporciona un sustrato práctico y legible para prosa, listas, tablas, código, enlaces y escritura técnica estructurada.
+
+Sin embargo, Markdown es la representación del contenido, no la metodología.
+
+IASI debe conservar la libertad de definir semántica por encima de él.
+
+## Independencia respecto a las herramientas
+
+Un fichero `.iasi` no debe definirse como:
+
+- un documento Quarto;
+- un documento Pandoc;
+- un documento de VS Code;
+- un prompt de Copilot;
+- un documento knitr.
+
+Esos sistemas pueden actuar como procesadores, adapters, editores o backends de materialización.
+
+No son propietarios del contrato fuente.
+
+La dirección de dependencia debe ser:
+
+```text
+fuente IASI
+    |
+    v
+interpretación IASI
+    |
+    +--> adapter Pandoc
+    +--> adapter Quarto
+    +--> integración con editores
+    +--> backend de publicación
+    +--> procesadores futuros
+```
+
+IASI conserva la propiedad semántica.
+
+## El front matter no basta
+
+El front matter proporciona a IASI un lugar donde serializar metadatos.
+
+No resuelve por sí mismo el problema semántico.
+
+Por ejemplo, esto sería sintácticamente posible:
+
+``` toml
+type = "inferred"
+```
+
+pero podría ser metodológicamente incorrecto si `inferred` es una propiedad de origen, mientras que `derived` pertenece a producción y `ephemeral` a ciclo de vida.
+
+El esquema de metadatos debe reflejar las dimensiones conceptuales en lugar de forzarlas dentro de campos cómodos pero engañosos.
+
+## Capacidades futuras
+
+El formato `.iasi` podrá incorporar en el futuro construcciones como:
+
+- bloques ejecutables;
+- referencias formales entre artefactos;
+- afirmaciones embebidas;
+- reglas de validación;
+- identificadores semánticos;
+- evidencia estructurada;
+- enlaces de trazabilidad;
+- instrucciones para Sistemas Inteligentes;
+- directivas de materialización.
+
+Estas capacidades deberían añadirse únicamente cuando preserven la separación central entre contenido y metadatos metodológicos.
+
+## Principio
+
+**`.iasi` es un contrato fuente de IASI, no un formato de otra herramienta con un nombre distinto.**
+
+Su sintaxis física debe mantenerse sencilla. Su semántica puede ser rica.

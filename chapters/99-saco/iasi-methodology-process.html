@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="IASI">
+<meta name="dcterms.date" content="2026-09-29">
+
+<title>IASI como metodología y proceso</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="iasi-methodology-process_files/libs/clipboard/clipboard.min.js"></script>
+<script src="iasi-methodology-process_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="iasi-methodology-process_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="iasi-methodology-process_files/libs/quarto-html/popper.min.js"></script>
+<script src="iasi-methodology-process_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="iasi-methodology-process_files/libs/quarto-html/anchor.min.js"></script>
+<link href="iasi-methodology-process_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="iasi-methodology-process_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="iasi-methodology-process_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="iasi-methodology-process_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="iasi-methodology-process_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#estado-de-este-documento" id="toc-estado-de-este-documento" class="nav-link active" data-scroll-target="#estado-de-este-documento"><span class="header-section-number">1</span> Estado de este documento</a></li>
+  <li><a href="#punto-de-partida" id="toc-punto-de-partida" class="nav-link" data-scroll-target="#punto-de-partida"><span class="header-section-number">2</span> 1. Punto de partida</a></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs"><span class="header-section-number">3</span> 2. Inputs</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-un-input" id="toc-qué-es-un-input" class="nav-link" data-scroll-target="#qué-es-un-input"><span class="header-section-number">3.1</span> 2.1 Qué es un Input</a></li>
+  <li><a href="#inputs-explícitos-e-inferidos" id="toc-inputs-explícitos-e-inferidos" class="nav-link" data-scroll-target="#inputs-explícitos-e-inferidos"><span class="header-section-number">3.2</span> 2.2 Inputs explícitos e inferidos</a></li>
+  </ul></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">4</span> 3. Sources</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-aparecen-las-sources" id="toc-por-qué-aparecen-las-sources" class="nav-link" data-scroll-target="#por-qué-aparecen-las-sources"><span class="header-section-number">4.1</span> 3.1 Por qué aparecen las Sources</a></li>
+  <li><a href="#una-source-no-implica-una-tecnología" id="toc-una-source-no-implica-una-tecnología" class="nav-link" data-scroll-target="#una-source-no-implica-una-tecnología"><span class="header-section-number">4.2</span> 3.2 Una Source no implica una tecnología</a></li>
+  <li><a href="#scope-de-las-sources" id="toc-scope-de-las-sources" class="nav-link" data-scroll-target="#scope-de-las-sources"><span class="header-section-number">4.3</span> 3.3 Scope de las Sources</a></li>
+  <li><a href="#authority" id="toc-authority" class="nav-link" data-scroll-target="#authority"><span class="header-section-number">4.4</span> 3.4 Authority</a></li>
+  </ul></li>
+  <li><a href="#sources-e-inputs" id="toc-sources-e-inputs" class="nav-link" data-scroll-target="#sources-e-inputs"><span class="header-section-number">5</span> 4. Sources e Inputs</a></li>
+  <li><a href="#una-única-fuente-de-verdad" id="toc-una-única-fuente-de-verdad" class="nav-link" data-scroll-target="#una-única-fuente-de-verdad"><span class="header-section-number">6</span> 5. Una única fuente de verdad</a></li>
+  <li><a href="#acceso-bajo-demanda" id="toc-acceso-bajo-demanda" class="nav-link" data-scroll-target="#acceso-bajo-demanda"><span class="header-section-number">7</span> 6. Acceso bajo demanda</a></li>
+  <li><a href="#specifications" id="toc-specifications" class="nav-link" data-scroll-target="#specifications"><span class="header-section-number">8</span> 7. Specifications</a>
+  <ul class="collapse">
+  <li><a href="#de-información-libre-a-conocimiento-normalizado" id="toc-de-información-libre-a-conocimiento-normalizado" class="nav-link" data-scroll-target="#de-información-libre-a-conocimiento-normalizado"><span class="header-section-number">8.1</span> 7.1 De información libre a conocimiento normalizado</a></li>
+  <li><a href="#iasi" id="toc-iasi" class="nav-link" data-scroll-target="#iasi"><span class="header-section-number">8.2</span> 7.2 <code>.iasi</code></a></li>
+  <li><a href="#contenido-y-metadatos" id="toc-contenido-y-metadatos" class="nav-link" data-scroll-target="#contenido-y-metadatos"><span class="header-section-number">8.3</span> 7.3 Contenido y metadatos</a></li>
+  <li><a href="#el-id" id="toc-el-id" class="nav-link" data-scroll-target="#el-id"><span class="header-section-number">8.4</span> 7.4 El <code>id</code></a></li>
+  </ul></li>
+  <li><a href="#el-proyecto-no-nace-completamente-especificado" id="toc-el-proyecto-no-nace-completamente-especificado" class="nav-link" data-scroll-target="#el-proyecto-no-nace-completamente-especificado"><span class="header-section-number">9</span> 8. El proyecto no nace completamente especificado</a></li>
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal"><span class="header-section-number">10</span> 9. Goal</a>
+  <ul class="collapse">
+  <li><a href="#por-qué-necesitamos-goal" id="toc-por-qué-necesitamos-goal" class="nav-link" data-scroll-target="#por-qué-necesitamos-goal"><span class="header-section-number">10.1</span> 9.1 Por qué necesitamos Goal</a></li>
+  <li><a href="#goal-no-es-specification" id="toc-goal-no-es-specification" class="nav-link" data-scroll-target="#goal-no-es-specification"><span class="header-section-number">10.2</span> 9.2 Goal no es Specification</a></li>
+  <li><a href="#goal-formal-o-informal" id="toc-goal-formal-o-informal" class="nav-link" data-scroll-target="#goal-formal-o-informal"><span class="header-section-number">10.3</span> 9.3 Goal formal o informal</a></li>
+  </ul></li>
+  <li><a href="#subgoals" id="toc-subgoals" class="nav-link" data-scroll-target="#subgoals"><span class="header-section-number">11</span> 10. Subgoals</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">12</span> 11. Tasks</a>
+  <ul class="collapse">
+  <li><a href="#el-sistema-ejecuta-tasks" id="toc-el-sistema-ejecuta-tasks" class="nav-link" data-scroll-target="#el-sistema-ejecuta-tasks"><span class="header-section-number">12.1</span> 11.1 El sistema ejecuta Tasks</a></li>
+  <li><a href="#specifications-y-tasks" id="toc-specifications-y-tasks" class="nav-link" data-scroll-target="#specifications-y-tasks"><span class="header-section-number">12.2</span> 11.2 Specifications y Tasks</a></li>
+  <li><a href="#el-si-puede-planificar" id="toc-el-si-puede-planificar" class="nav-link" data-scroll-target="#el-si-puede-planificar"><span class="header-section-number">12.3</span> 11.3 El SI puede planificar</a></li>
+  <li><a href="#el-humano-mantiene-el-control" id="toc-el-humano-mantiene-el-control" class="nav-link" data-scroll-target="#el-humano-mantiene-el-control"><span class="header-section-number">12.4</span> 11.4 El humano mantiene el control</a></li>
+  </ul></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs"><span class="header-section-number">13</span> 12. Outputs</a></li>
+  <li><a href="#output-no-es-outcome" id="toc-output-no-es-outcome" class="nav-link" data-scroll-target="#output-no-es-outcome"><span class="header-section-number">14</span> 13. Output no es Outcome</a></li>
+  <li><a href="#validación" id="toc-validación" class="nav-link" data-scroll-target="#validación"><span class="header-section-number">15</span> 14. Validación</a>
+  <ul class="collapse">
+  <li><a href="#quién-dice-que-una-task-ha-ido-bien" id="toc-quién-dice-que-una-task-ha-ido-bien" class="nav-link" data-scroll-target="#quién-dice-que-una-task-ha-ido-bien"><span class="header-section-number">15.1</span> 14.1 ¿Quién dice que una Task ha ido bien?</a></li>
+  <li><a href="#niveles-de-validación" id="toc-niveles-de-validación" class="nav-link" data-scroll-target="#niveles-de-validación"><span class="header-section-number">15.2</span> 14.2 Niveles de validación</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-creación-de-iasi-tools" id="toc-ejemplo-creación-de-iasi-tools" class="nav-link" data-scroll-target="#ejemplo-creación-de-iasi-tools"><span class="header-section-number">16</span> 15. Ejemplo: creación de <code>iasi-tools</code></a></li>
+  <li><a href="#el-fallo-genera-conocimiento" id="toc-el-fallo-genera-conocimiento" class="nav-link" data-scroll-target="#el-fallo-genera-conocimiento"><span class="header-section-number">17</span> 16. El fallo genera conocimiento</a></li>
+  <li><a href="#iteración" id="toc-iteración" class="nav-link" data-scroll-target="#iteración"><span class="header-section-number">18</span> 17. Iteración</a></li>
+  <li><a href="#bloqueos-y-ausencia-de-imaginación" id="toc-bloqueos-y-ausencia-de-imaginación" class="nav-link" data-scroll-target="#bloqueos-y-ausencia-de-imaginación"><span class="header-section-number">19</span> 18. Bloqueos y ausencia de imaginación</a></li>
+  <li><a href="#vista-consolidada" id="toc-vista-consolidada" class="nav-link" data-scroll-target="#vista-consolidada"><span class="header-section-number">20</span> 19. Vista consolidada</a></li>
+  <li><a href="#relaciones-conceptuales-importantes" id="toc-relaciones-conceptuales-importantes" class="nav-link" data-scroll-target="#relaciones-conceptuales-importantes"><span class="header-section-number">21</span> 20. Relaciones conceptuales importantes</a></li>
+  <li><a href="#papel-de-uses" id="toc-papel-de-uses" class="nav-link" data-scroll-target="#papel-de-uses"><span class="header-section-number">22</span> 21. Papel de <code>uses</code></a></li>
+  <li><a href="#cuestiones-abiertas" id="toc-cuestiones-abiertas" class="nav-link" data-scroll-target="#cuestiones-abiertas"><span class="header-section-number">23</span> 22. Cuestiones abiertas</a>
+  <ul class="collapse">
+  <li><a href="#versionado-de-referencias" id="toc-versionado-de-referencias" class="nav-link" data-scroll-target="#versionado-de-referencias"><span class="header-section-number">23.1</span> 22.1 Versionado de referencias</a></li>
+  <li><a href="#semántica-de-authority" id="toc-semántica-de-authority" class="nav-link" data-scroll-target="#semántica-de-authority"><span class="header-section-number">23.2</span> 22.2 Semántica de Authority</a></li>
+  <li><a href="#descubrimiento-de-sources" id="toc-descubrimiento-de-sources" class="nav-link" data-scroll-target="#descubrimiento-de-sources"><span class="header-section-number">23.3</span> 22.3 Descubrimiento de Sources</a></li>
+  <li><a href="#formalización-de-goals" id="toc-formalización-de-goals" class="nav-link" data-scroll-target="#formalización-de-goals"><span class="header-section-number">23.4</span> 22.4 Formalización de Goals</a></li>
+  <li><a href="#resultados-de-validación" id="toc-resultados-de-validación" class="nav-link" data-scroll-target="#resultados-de-validación"><span class="header-section-number">23.5</span> 22.5 Resultados de validación</a></li>
+  </ul></li>
+  <li><a href="#principios-que-empiezan-a-emerger" id="toc-principios-que-empiezan-a-emerger" class="nav-link" data-scroll-target="#principios-que-empiezan-a-emerger"><span class="header-section-number">24</span> 23. Principios que empiezan a emerger</a></li>
+  <li><a href="#modelo-resumido" id="toc-modelo-resumido" class="nav-link" data-scroll-target="#modelo-resumido"><span class="header-section-number">25</span> 24. Modelo resumido</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">IASI como metodología y proceso</h1>
+<p class="subtitle lead">Inputs, Sources, Specifications, Goals, Tasks, Outputs y ciclos de aprendizaje</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>IASI </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="estado-de-este-documento" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Estado de este documento</h1>
+<p>Este documento recoge el modelo conceptual discutido para <strong>IASI como metodología y proceso</strong>, separándolo deliberadamente de sus implementaciones concretas, herramientas, CLI, repositorios o tecnologías.</p>
+<p>No pretende cerrar todavía una ontología formal. Su finalidad es fijar las piezas que ya encajan, conservar las preguntas abiertas y proporcionar una base sobre la que seguir refinando la metodología.</p>
+<p>La idea central es que IASI no debe definirse por una herramienta concreta. Git, GitHub, Quarto, TOML, PowerShell, Go o cualquier Sistema Inteligente son mecanismos posibles. La metodología debe seguir siendo válida aunque cualquiera de ellos cambie.</p>
+</section>
+<section id="punto-de-partida" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 1. Punto de partida</h1>
+<p>IASI trabaja con conocimiento heterogéneo y lo transforma en conocimiento utilizable para realizar ingeniería.</p>
+<p>El esquema más simple del que partimos es:</p>
+<pre class="plantuml"><code>@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+
+inputs --&gt; specs
+@enduml</code></pre>
+<p>Pero este modelo resulta insuficiente en cuanto aparece conocimiento que <strong>no pertenece al proyecto concreto</strong> y que, sin embargo, debe ser utilizado.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>normas de codificación de una organización;</li>
+<li>convenciones de logging;</li>
+<li>códigos de retorno;</li>
+<li>naming conventions;</li>
+<li>design system;</li>
+<li>paleta de colores;</li>
+<li>arquitectura corporativa;</li>
+<li>políticas de seguridad;</li>
+<li>utilidades comunes;</li>
+<li>estándares técnicos;</li>
+<li>documentación externa.</li>
+</ul>
+<p>Eso conduce al concepto de <strong>Sources</strong>.</p>
+</section>
+<section id="inputs" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 2. Inputs</h1>
+<section id="qué-es-un-input" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="qué-es-un-input"><span class="header-section-number">3.1</span> 2.1 Qué es un Input</h2>
+<p>Un <strong>Input</strong> es información propia del proyecto, iniciativa o trabajo concreto.</p>
+<p>No implica ningún formato determinado.</p>
+<p>Puede ser:</p>
+<ul>
+<li>una conversación;</li>
+<li>texto libre;</li>
+<li>un correo;</li>
+<li>un PDF;</li>
+<li>una imagen;</li>
+<li>un documento;</li>
+<li>código;</li>
+<li>un ticket;</li>
+<li>un requisito;</li>
+<li>una observación;</li>
+<li>una decisión explícita;</li>
+<li>cualquier otra forma de información.</li>
+</ul>
+<p>Por tanto:</p>
+<blockquote class="blockquote">
+<p><strong>Input es una categoría metodológica, no un formato físico.</strong></p>
+</blockquote>
+<p>El formato es únicamente su representación.</p>
+</section>
+<section id="inputs-explícitos-e-inferidos" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="inputs-explícitos-e-inferidos"><span class="header-section-number">3.2</span> 2.2 Inputs explícitos e inferidos</h2>
+<p>Un Input puede haber sido proporcionado explícitamente o aparecer durante el propio proceso.</p>
+<p>Un conocimiento descubierto durante el trabajo puede registrarse, por ejemplo, como un Input inferido:</p>
+<pre class="text"><code>inputs/
+  authored/
+  inferred/</code></pre>
+<p>La denominación y estructura física definitiva puede cambiar. Lo importante es conservar la diferencia semántica entre:</p>
+<ul>
+<li>información proporcionada explícitamente;</li>
+<li>información legítimamente inferida durante el proceso.</li>
+</ul>
+<p>Un principio importante es:</p>
+<blockquote class="blockquote">
+<p><strong>Inferir no es inventar.</strong></p>
+</blockquote>
+<p>Si existen varias interpretaciones plausibles y la evidencia no permite resolverlas, el Sistema Inteligente no debe elegir arbitrariamente una.</p>
+</section>
+</section>
+<section id="sources" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 3. Sources</h1>
+<section id="por-qué-aparecen-las-sources" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="por-qué-aparecen-las-sources"><span class="header-section-number">4.1</span> 3.1 Por qué aparecen las Sources</h2>
+<p>Una organización puede disponer de cientos de megabytes de normas, arquitectura, guías, componentes, ejemplos y conocimiento reutilizable.</p>
+<p>No tiene sentido copiar todo ese conocimiento dentro de cada proyecto.</p>
+<p>Por ejemplo, al construir una aplicación web con backend no sería razonable volver a especificar en cada proyecto:</p>
+<ul>
+<li>formato corporativo de logs;</li>
+<li>niveles de logging;</li>
+<li>colores;</li>
+<li>tipografía;</li>
+<li>convenciones REST;</li>
+<li>formato de errores;</li>
+<li>políticas de seguridad;</li>
+<li>naming conventions.</li>
+</ul>
+<p>Ese conocimiento ya existe en otro ámbito.</p>
+<p>Por tanto aparece:</p>
+<blockquote class="blockquote">
+<p><strong>Source: fuente accesible de conocimiento que existe independientemente del proyecto concreto.</strong></p>
+</blockquote>
+</section>
+<section id="una-source-no-implica-una-tecnología" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="una-source-no-implica-una-tecnología"><span class="header-section-number">4.2</span> 3.2 Una Source no implica una tecnología</h2>
+<p>Una Source puede estar en:</p>
+<ul>
+<li>GitHub;</li>
+<li>GitLab;</li>
+<li>filesystem;</li>
+<li>SharePoint;</li>
+<li>una API;</li>
+<li>una base de datos;</li>
+<li>un repositorio documental;</li>
+<li>una URL;</li>
+<li>un catálogo interno;</li>
+<li>cualquier otro mecanismo accesible.</li>
+</ul>
+<p>Metodológicamente importa que pueda ser identificada, consultada y entendida, no dónde esté alojada.</p>
+</section>
+<section id="scope-de-las-sources" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="scope-de-las-sources"><span class="header-section-number">4.3</span> 3.3 Scope de las Sources</h2>
+<p>Una Source puede pertenecer a distintos ámbitos:</p>
+<ul>
+<li>IASI;</li>
+<li>organización;</li>
+<li>departamento;</li>
+<li>programa;</li>
+<li>producto;</li>
+<li>plataforma;</li>
+<li>dominio;</li>
+<li>equipo;</li>
+<li>ecosistema externo.</li>
+</ul>
+<p>Por tanto, una Source no es necesariamente “del proyecto”.</p>
+</section>
+<section id="authority" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="authority"><span class="header-section-number">4.4</span> 3.4 Authority</h2>
+<p>No todas las Sources tienen el mismo peso.</p>
+<p>Una política corporativa vigente no tiene la misma autoridad que un README antiguo o un ejemplo encontrado en Internet.</p>
+<p>Por eso aparece el concepto de:</p>
+<blockquote class="blockquote">
+<p><strong>Authority: autoridad atribuida a una Source o a conocimiento procedente de ella.</strong></p>
+</blockquote>
+<p>Todavía queda por formalizar cómo se expresa y resuelve esa autoridad.</p>
+<p>Lo importante es que el Sistema Inteligente puede decidir qué información parece relevante, pero no debería decidir libremente que una norma obligatoria deja de ser obligatoria.</p>
+</section>
+</section>
+<section id="sources-e-inputs" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 4. Sources e Inputs</h1>
+<p>Una Source puede actuar como <strong>fuente de Inputs</strong>.</p>
+<p>Ejemplo:</p>
+<ul>
+<li>Jira puede ser una Source;</li>
+<li>determinados tickets recuperados de Jira pueden convertirse en Inputs de un proyecto.</li>
+</ul>
+<p>Pero una Source también puede aportar conocimiento directamente al proceso de especificación sin convertirse conceptualmente en Input propio del proyecto.</p>
+<p>Por tanto existen al menos dos caminos:</p>
+<pre class="plantuml"><code>@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Sources" as sources
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+
+sources --&gt; inputs : aporta
+inputs --&gt; specs : normaliza
+sources --&gt; specs : referencia / aporta contexto
+@enduml</code></pre>
+<p>Esto permite mantener una separación clara:</p>
+<ul>
+<li><strong>Inputs</strong>: conocimiento propio del proyecto;</li>
+<li><strong>Sources</strong>: conocimiento accesible y reutilizable que existe fuera de él.</li>
+</ul>
+</section>
+<section id="una-única-fuente-de-verdad" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 5. Una única fuente de verdad</h1>
+<p>El conocimiento autoritativo no debe copiarse innecesariamente dentro de cada proyecto.</p>
+<p>Si una organización dispone de una norma corporativa de logging, copiarla en trescientos proyectos genera:</p>
+<ul>
+<li>duplicación;</li>
+<li>divergencia;</li>
+<li>versiones obsoletas;</li>
+<li>problemas de mantenimiento;</li>
+<li>consumo innecesario de contexto y tokens.</li>
+</ul>
+<p>La regla es:</p>
+<blockquote class="blockquote">
+<p><strong>El conocimiento compartido permanece en su Source autoritativa. El proyecto lo referencia.</strong></p>
+</blockquote>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">uses</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://logging/backend</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://design/colors</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://security/web</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>uses</code> expresa una relación.</p>
+<p>No significa:</p>
+<ul>
+<li>copiar el contenido;</li>
+<li>apropiarse de la Source;</li>
+<li>crear una segunda fuente de verdad.</li>
+</ul>
+<p>Significa aproximadamente:</p>
+<blockquote class="blockquote">
+<p>Esta unidad de conocimiento reconoce y utiliza estas Sources como contexto pertinente.</p>
+</blockquote>
+</section>
+<section id="acceso-bajo-demanda" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 6. Acceso bajo demanda</h1>
+<p>Un Sistema Inteligente no necesita cargar 500 MB de normas para crear un pequeño script.</p>
+<p>Debe disponer de <strong>acceso</strong> al corpus y resolver únicamente el conocimiento necesario para la tarea que está realizando.</p>
+<pre class="plantuml"><code>@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Organization Sources\n500 MB" as sources
+rectangle "Discovery / Retrieval" as retrieve
+rectangle "Relevant knowledge" as relevant
+rectangle "Current work" as work
+
+sources --&gt; retrieve
+retrieve --&gt; relevant : solo lo necesario
+relevant --&gt; work
+@enduml</code></pre>
+<p>El subconjunto recuperado puede ser efímero.</p>
+<p>No es necesario materializarlo como una copia persistente dentro del proyecto si la Source original sigue siendo accesible.</p>
+</section>
+<section id="specifications" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 7. Specifications</h1>
+<section id="de-información-libre-a-conocimiento-normalizado" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="de-información-libre-a-conocimiento-normalizado"><span class="header-section-number">8.1</span> 7.1 De información libre a conocimiento normalizado</h2>
+<p>Los Inputs pueden ser heterogéneos y estar en formato libre.</p>
+<p>IASI normaliza el resultado de su interpretación en <strong>Specifications</strong>.</p>
+<pre class="plantuml"><code>@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs\nformato libre" as inputs
+rectangle "Interpretation /\nNormalization" as normalize
+rectangle "Specifications\nnormalizadas" as specs
+
+inputs --&gt; normalize
+normalize --&gt; specs
+@enduml</code></pre>
+<p>Las Sources también pueden participar en esa normalización.</p>
+</section>
+<section id="iasi" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="iasi"><span class="header-section-number">8.2</span> 7.2 <code>.iasi</code></h2>
+<p>Una representación prevista para las Specifications es un documento <code>.iasi</code> basado en:</p>
+<ul>
+<li>Markdown para el contenido;</li>
+<li>front matter para los metadatos.</li>
+</ul>
+<p>La metodología no depende de Markdown ni del front matter. Son mecanismos físicos convenientes para expresar el modelo.</p>
+<p>Su ventaja es que resultan:</p>
+<ul>
+<li>legibles por humanos;</li>
+<li>fáciles de procesar por máquinas;</li>
+<li>fáciles de interpretar por Sistemas Inteligentes;</li>
+<li>transportables;</li>
+<li>versionables;</li>
+<li>extensibles.</li>
+</ul>
+</section>
+<section id="contenido-y-metadatos" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="contenido-y-metadatos"><span class="header-section-number">8.3</span> 7.3 Contenido y metadatos</h2>
+<p>IASI distingue dos planos:</p>
+<p><strong>Contenido</strong></p>
+<p>Responde a:</p>
+<blockquote class="blockquote">
+<p>¿Qué dice esto?</p>
+</blockquote>
+<p><strong>Metadatos</strong></p>
+<p>Responden a:</p>
+<blockquote class="blockquote">
+<p>¿Qué es esto y cómo debe tratarse?</p>
+</blockquote>
+<p>Los metadatos son fundamentales porque dos documentos sintácticamente similares pueden tener significados metodológicos completamente distintos.</p>
+<p>Entre los candidatos a metadata aparecen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">authority</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">owner</span><span class="kw">:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">updated</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">validity</span><span class="kw">:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">relations</span><span class="kw">:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">uses</span><span class="kw">:</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La lista no está cerrada.</p>
+</section>
+<section id="el-id" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="el-id"><span class="header-section-number">8.4</span> 7.4 El <code>id</code></h2>
+<p>El identificador es especialmente importante.</p>
+<p>Permite:</p>
+<ul>
+<li>referenciar una Specification;</li>
+<li>relacionarla con otras;</li>
+<li>establecer trazabilidad;</li>
+<li>evitar depender del nombre físico de un fichero;</li>
+<li>construir relaciones estables.</li>
+</ul>
+</section>
+</section>
+<section id="el-proyecto-no-nace-completamente-especificado" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 8. El proyecto no nace completamente especificado</h1>
+<p>Incluso en un caso pequeño sería utópico esperar que toda la casuística estuviera correctamente definida desde el primer momento.</p>
+<p>Ejemplo: crear <code>iasi-tools</code> mediante PowerShell.</p>
+<p>Durante el trabajo pueden aparecer:</p>
+<ul>
+<li>dependencias no previstas;</li>
+<li>restricciones desconocidas;</li>
+<li>casos límite;</li>
+<li>contradicciones;</li>
+<li>decisiones pendientes;</li>
+<li>fallos de ejecución;</li>
+<li>nuevas condiciones de aceptación.</li>
+</ul>
+<p>Por tanto:</p>
+<blockquote class="blockquote">
+<p><strong>Especificar no es únicamente una fase inicial. Es una actividad continua.</strong></p>
+</blockquote>
+</section>
+<section id="goal" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> 9. Goal</h1>
+<section id="por-qué-necesitamos-goal" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="por-qué-necesitamos-goal"><span class="header-section-number">10.1</span> 9.1 Por qué necesitamos Goal</h2>
+<p>Un proyecto puede completar muchas Tasks y, aun así, no haber conseguido aquello que pretendía.</p>
+<p>Ejemplo:</p>
+<p>se pueden completar quince tareas relacionadas con la creación de <code>hyper-v.ps1</code>, pero no haber creado realmente ninguna máquina virtual.</p>
+<p>Por eso debe existir, formal o informalmente, una respuesta a:</p>
+<blockquote class="blockquote">
+<p><strong>¿Qué quiero conseguir?</strong></p>
+</blockquote>
+<p>Eso es el <strong>Goal</strong>.</p>
+</section>
+<section id="goal-no-es-specification" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="goal-no-es-specification"><span class="header-section-number">10.2</span> 9.2 Goal no es Specification</h2>
+<p>Una Specification describe condiciones, propiedades o conocimiento que debe cumplirse.</p>
+<p>Un Goal expresa el estado o resultado que queremos alcanzar.</p>
+<p>Ejemplo:</p>
+<pre class="text"><code>Goal:
+  Tener una máquina iasi-tools operativa.
+
+Specifications:
+  Los mensajes PowerShell incluyen hora.
+  Los mensajes usan las convenciones de color corporativas.
+  Los códigos de retorno siguen el criterio establecido.
+  Docker debe quedar operativo.</code></pre>
+</section>
+<section id="goal-formal-o-informal" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="goal-formal-o-informal"><span class="header-section-number">10.3</span> 9.3 Goal formal o informal</h2>
+<p>Un Goal puede ser:</p>
+<ul>
+<li>explícito y formal;</li>
+<li>explícito pero informal;</li>
+<li>inferido;</li>
+<li>refinado durante el proceso.</li>
+</ul>
+<p>No todo debe formalizarse matemáticamente desde el principio.</p>
+<p>La metodología debe permitir distintos grados de formalización.</p>
+</section>
+</section>
+<section id="subgoals" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 10. Subgoals</h1>
+<p>Un Goal puede descomponerse en <strong>Subgoals</strong>.</p>
+<p>Ejemplo:</p>
+<pre class="text"><code>Goal:
+  Tener iasi-tools operativa.
+
+Subgoals:
+  - Tener la VM creada.
+  - Tener el sistema operativo instalado.
+  - Poder conectarse.
+  - Tener Docker arrancado.</code></pre>
+<p>Pero:</p>
+<blockquote class="blockquote">
+<p><strong>Un Subgoal no es el Goal.</strong></p>
+</blockquote>
+<p>Cumplir un Subgoal no implica necesariamente haber alcanzado el Goal global.</p>
+</section>
+<section id="tasks" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> 11. Tasks</h1>
+<section id="el-sistema-ejecuta-tasks" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="el-sistema-ejecuta-tasks"><span class="header-section-number">12.1</span> 11.1 El sistema ejecuta Tasks</h2>
+<p>El trabajo operativo se expresa mediante <strong>Tasks</strong>.</p>
+<p>Una Task puede ser creada por:</p>
+<ul>
+<li>una persona;</li>
+<li>un Sistema Inteligente;</li>
+<li>una planificación automática;</li>
+<li>otro proceso.</li>
+</ul>
+<p>El origen no cambia su naturaleza metodológica.</p>
+</section>
+<section id="specifications-y-tasks" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="specifications-y-tasks"><span class="header-section-number">12.2</span> 11.2 Specifications y Tasks</h2>
+<p>Una Specification dice, aproximadamente:</p>
+<blockquote class="blockquote">
+<p>qué debe ser cierto.</p>
+</blockquote>
+<p>Una Task dice:</p>
+<blockquote class="blockquote">
+<p>qué hay que hacer.</p>
+</blockquote>
+<p>Ejemplo:</p>
+<pre class="text"><code>Specification:
+  Los scripts PowerShell deben emitir mensajes según
+  las convenciones corporativas.
+
+Task:
+  Crear un ps1 que emita mensajes según esas convenciones
+  y devuelva diferentes códigos de retorno.</code></pre>
+</section>
+<section id="el-si-puede-planificar" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="el-si-puede-planificar"><span class="header-section-number">12.3</span> 11.3 El SI puede planificar</h2>
+<p>Dado suficiente conocimiento del proyecto, se puede pedir al Sistema Inteligente:</p>
+<blockquote class="blockquote">
+<p>Fasea este proyecto y dame una lista de Tasks sensatas.</p>
+</blockquote>
+<p>La descomposición no es única.</p>
+<p>Por ejemplo, para Jira se pueden pedir:</p>
+<ul>
+<li>tareas de una semana;</li>
+<li>tareas de quince días;</li>
+<li>tareas por componente;</li>
+<li>tareas por riesgo;</li>
+<li>tareas por sprint;</li>
+<li>tareas según dependencias.</li>
+</ul>
+<p>Las Specifications pueden permanecer iguales mientras cambia la estrategia de planificación.</p>
+<pre class="plantuml"><code>@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Specifications" as specs
+rectangle "Goal" as goal
+rectangle "Planning criteria" as criteria
+rectangle "Tasks" as tasks
+
+specs --&gt; tasks
+goal --&gt; tasks
+criteria --&gt; tasks
+@enduml</code></pre>
+</section>
+<section id="el-humano-mantiene-el-control" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="el-humano-mantiene-el-control"><span class="header-section-number">12.4</span> 11.4 El humano mantiene el control</h2>
+<p>El Sistema Inteligente puede proponer Tasks, pero no monopoliza la planificación.</p>
+<p>Una persona puede:</p>
+<ul>
+<li>crear Tasks;</li>
+<li>modificar Tasks;</li>
+<li>dividirlas;</li>
+<li>agruparlas;</li>
+<li>reordenarlas;</li>
+<li>descartarlas;</li>
+<li>definir su granularidad.</li>
+</ul>
+</section>
+</section>
+<section id="outputs" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> 12. Outputs</h1>
+<p>Las Tasks producen <strong>Outputs</strong>.</p>
+<p>En la implementación actual de IASI, esos resultados derivados se materializan en <code>_outputs</code>.</p>
+<pre class="text"><code>Task
+  ↓
+Execution
+  ↓
+_outputs/</code></pre>
+<p>Los Outputs son derivados y regenerables.</p>
+<p>No deben convertirse accidentalmente en la fuente de verdad.</p>
+</section>
+<section id="output-no-es-outcome" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> 13. Output no es Outcome</h1>
+<p>Es necesario distinguir:</p>
+<ul>
+<li><strong>Output</strong>: artefacto producido por una Task;</li>
+<li><strong>Outcome</strong>: estado real conseguido.</li>
+</ul>
+<p>Ejemplo:</p>
+<pre class="text"><code>Output:
+  _outputs/hyper-v.ps1
+
+Outcome:
+  existe una VM iasi-tools,
+  arranca,
+  permite login,
+  Docker está activo.</code></pre>
+<p>Un <code>hyper-v.ps1</code> sintácticamente perfecto puede existir y, sin embargo, la VM no funcionar.</p>
+<p>Por tanto:</p>
+<blockquote class="blockquote">
+<p><strong>Output correcto no implica Goal alcanzado.</strong></p>
+</blockquote>
+</section>
+<section id="validación" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> 14. Validación</h1>
+<section id="quién-dice-que-una-task-ha-ido-bien" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="quién-dice-que-una-task-ha-ido-bien"><span class="header-section-number">15.1</span> 14.1 ¿Quién dice que una Task ha ido bien?</h2>
+<p>Una Task no debería considerarse correcta únicamente porque terminó de ejecutarse.</p>
+<p>Es necesario validar su resultado.</p>
+<pre class="plantuml"><code>@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Task" as task
+rectangle "Execution" as exec
+rectangle "Outputs" as outputs
+rectangle "Validation" as validation
+rectangle "Pass / Fail /\nInconclusive" as result
+
+task --&gt; exec
+exec --&gt; outputs
+outputs --&gt; validation
+validation --&gt; result
+@enduml</code></pre>
+<p>La validación puede realizarla:</p>
+<ul>
+<li>una herramienta;</li>
+<li>un test;</li>
+<li>una persona;</li>
+<li>un Sistema Inteligente;</li>
+<li>otro Sistema Inteligente;</li>
+<li>una combinación de varios mecanismos.</li>
+</ul>
+</section>
+<section id="niveles-de-validación" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="niveles-de-validación"><span class="header-section-number">15.2</span> 14.2 Niveles de validación</h2>
+<p>Pueden existir diferentes niveles:</p>
+<p><strong>Task validation</strong></p>
+<blockquote class="blockquote">
+<p>¿La tarea se ejecutó correctamente?</p>
+</blockquote>
+<p><strong>Subgoal validation</strong></p>
+<blockquote class="blockquote">
+<p>¿Se alcanzó este estado intermedio?</p>
+</blockquote>
+<p><strong>Goal validation</strong></p>
+<blockquote class="blockquote">
+<p>¿Se consiguió realmente lo que se quería?</p>
+</blockquote>
+<p>No deben confundirse.</p>
+</section>
+</section>
+<section id="ejemplo-creación-de-iasi-tools" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> 15. Ejemplo: creación de <code>iasi-tools</code></h1>
+<p>Supongamos el Goal:</p>
+<pre class="text"><code>Tener una VM iasi-tools creada, arrancada, accesible y con Docker operativo.</code></pre>
+<p>Posibles Tasks:</p>
+<pre class="text"><code>- Crear funciones de mensajes.
+- Implementar códigos de retorno.
+- Obtener la ISO necesaria.
+- Generar configuración de autoinstall.
+- Crear la VM.
+- Arrancar la VM.
+- Verificar instalación.
+- Verificar login.
+- Verificar red.
+- Verificar Docker.</code></pre>
+<p>Puede ocurrir:</p>
+<pre class="text"><code>Task: crear hyper-v.ps1
+Status: PASS</code></pre>
+<p>pero:</p>
+<pre class="text"><code>Subgoal: VM arrancada
+Status: FAIL</code></pre>
+<p>El artefacto puede haberse creado correctamente y, sin embargo, el sistema real no haber alcanzado el estado deseado.</p>
+</section>
+<section id="el-fallo-genera-conocimiento" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> 16. El fallo genera conocimiento</h1>
+<p>Cuando una Task falla, no debe suponerse automáticamente que basta con modificar la propia Task.</p>
+<p>El fallo puede revelar que:</p>
+<ul>
+<li>falta un Input;</li>
+<li>un Input era incorrecto;</li>
+<li>debe crearse un Input inferido;</li>
+<li>falta una Specification;</li>
+<li>una Specification es ambigua;</li>
+<li>una Specification es incorrecta;</li>
+<li>existen Sources contradictorias;</li>
+<li>falta una Source;</li>
+<li>el Goal estaba incompleto;</li>
+<li>un Subgoal necesita refinarse.</li>
+</ul>
+<p>Por tanto el fallo realimenta el conocimiento del proyecto.</p>
+<pre class="plantuml"><code>@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs + Sources" as inputs
+rectangle "Specifications" as specs
+rectangle "Goal / Subgoals" as goals
+rectangle "Tasks" as tasks
+rectangle "Execution" as execution
+rectangle "Validation" as validation
+diamond "Valid?" as valid
+rectangle "Refine knowledge" as refine
+rectangle "Replan" as replan
+
+inputs --&gt; specs
+specs --&gt; goals
+specs --&gt; tasks
+goals --&gt; tasks
+tasks --&gt; execution
+execution --&gt; validation
+validation --&gt; valid
+
+valid --&gt; tasks : yes / next work
+valid --&gt; refine : no
+
+refine --&gt; inputs : new/refined input
+refine --&gt; specs : new/refined specification
+refine --&gt; goals : if needed
+
+inputs --&gt; replan
+specs --&gt; replan
+goals --&gt; replan
+replan --&gt; tasks
+@enduml</code></pre>
+</section>
+<section id="iteración" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> 17. Iteración</h1>
+<p>La iteración no existe porque la metodología diga simplemente “hay que iterar”.</p>
+<p>La iteración aparece porque la ejecución del trabajo produce conocimiento nuevo.</p>
+<p>El ciclo general puede expresarse como:</p>
+<pre class="text"><code>Execute
+   ↓
+Validate
+   ↓
+Learn
+   ↓
+Refine
+   ↓
+Replan
+   ↓
+Execute again</code></pre>
+<p>IASI es por tanto un proceso iterativo y recursivo.</p>
+</section>
+<section id="bloqueos-y-ausencia-de-imaginación" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> 18. Bloqueos y ausencia de imaginación</h1>
+<p>El Sistema Inteligente no debe rellenar arbitrariamente la información que falta.</p>
+<p>Si aparece una duda que no puede resolverse con:</p>
+<ul>
+<li>Inputs;</li>
+<li>Sources;</li>
+<li>Specifications;</li>
+<li>inferencias suficientemente justificadas;</li>
+</ul>
+<p>debe detener ese camino.</p>
+<p>Ejemplos conceptuales:</p>
+<pre class="text"><code>Blocked:
+  missing_input</code></pre>
+<pre class="text"><code>Blocked:
+  specification_ambiguity</code></pre>
+<pre class="text"><code>Blocked:
+  conflicting_sources</code></pre>
+<p>El bloqueo también es información.</p>
+<p>Puede desencadenar:</p>
+<ul>
+<li>solicitud de un nuevo Input;</li>
+<li>revisión de una Specification;</li>
+<li>consulta de una nueva Source;</li>
+<li>resolución humana;</li>
+<li>replanteamiento de una Task.</li>
+</ul>
+</section>
+<section id="vista-consolidada" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> 19. Vista consolidada</h1>
+<p>La fotografía conceptual provisional puede resumirse así:</p>
+<pre class="plantuml"><code>@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Sources" as sources
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+rectangle "Goal /\nSubgoals" as goals
+rectangle "Tasks" as tasks
+rectangle "Execution" as execution
+rectangle "_outputs" as outputs
+rectangle "Validation" as validation
+rectangle "Outcome" as outcome
+
+sources --&gt; inputs : puede aportar
+sources --&gt; specs : references / uses
+inputs --&gt; specs : normalize
+specs --&gt; goals : inform
+specs --&gt; tasks : constrain
+goals --&gt; tasks : orient
+tasks --&gt; execution
+execution --&gt; outputs
+execution --&gt; outcome
+outputs --&gt; validation
+outcome --&gt; validation
+validation --&gt; inputs : findings / inferred
+validation --&gt; specs : refine
+validation --&gt; tasks : replan
+validation --&gt; goals : refine if needed
+@enduml</code></pre>
+</section>
+<section id="relaciones-conceptuales-importantes" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> 20. Relaciones conceptuales importantes</h1>
+<p>Hasta este punto conviene conservar explícitamente estas desigualdades:</p>
+<pre class="text"><code>Input            != Source
+Source           != Specification
+Specification    != Task
+Task             != Goal
+Subgoal          != Goal
+Task completed   != Goal achieved
+Output           != Outcome
+Inference        != Invention
+Reference        != Copy</code></pre>
+<p>Estas diferencias parecen pequeñas, pero evitan mezclar conocimiento, trabajo, artefactos y objetivos.</p>
+</section>
+<section id="papel-de-uses" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> 21. Papel de <code>uses</code></h1>
+<p><code>uses</code> aparece como un candidato especialmente útil para los metadatos.</p>
+<p>Ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> backend-service</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">uses</span><span class="kw">:</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://logging/backend</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://security/web</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> org://design/colors</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Permite que un documento ligero del proyecto deje constancia de:</p>
+<ul>
+<li>qué Sources considera pertinentes;</li>
+<li>qué conocimiento externo debe resolver un SI;</li>
+<li>qué referencias participaron en la interpretación;</li>
+<li>qué autoridad externa condiciona el trabajo.</li>
+</ul>
+<p>Todo ello sin duplicar el contenido de las Sources.</p>
+</section>
+<section id="cuestiones-abiertas" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> 22. Cuestiones abiertas</h1>
+<p>Este modelo todavía deja asuntos por resolver deliberadamente.</p>
+<section id="versionado-de-referencias" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="versionado-de-referencias"><span class="header-section-number">23.1</span> 22.1 Versionado de referencias</h2>
+<p>Una referencia podría significar:</p>
+<pre class="text"><code>org://logging/backend</code></pre>
+<p>es decir:</p>
+<blockquote class="blockquote">
+<p>utilizar la versión vigente.</p>
+</blockquote>
+<p>O podría fijar:</p>
+<pre class="text"><code>org://logging/backend@3.2</code></pre>
+<p>es decir:</p>
+<blockquote class="blockquote">
+<p>utilizar exactamente esta versión.</p>
+</blockquote>
+<p>Esto enfrenta dos necesidades:</p>
+<ul>
+<li>seguir automáticamente la norma vigente;</li>
+<li>reproducir exactamente el contexto histórico utilizado.</li>
+</ul>
+</section>
+<section id="semántica-de-authority" class="level2" data-number="23.2">
+<h2 data-number="23.2" class="anchored" data-anchor-id="semántica-de-authority"><span class="header-section-number">23.2</span> 22.2 Semántica de Authority</h2>
+<p>Falta definir:</p>
+<ul>
+<li>niveles;</li>
+<li>precedencia;</li>
+<li>conflictos;</li>
+<li>scope;</li>
+<li>posibles overrides;</li>
+<li>reglas de herencia.</li>
+</ul>
+</section>
+<section id="descubrimiento-de-sources" class="level2" data-number="23.3">
+<h2 data-number="23.3" class="anchored" data-anchor-id="descubrimiento-de-sources"><span class="header-section-number">23.3</span> 22.3 Descubrimiento de Sources</h2>
+<p>El SI puede determinar qué Sources parecen relevantes.</p>
+<p>Pero sigue pendiente definir:</p>
+<ul>
+<li>cómo se descubren;</li>
+<li>qué Sources son obligatorias;</li>
+<li>cuáles son opcionales;</li>
+<li>cómo se limita el universo de búsqueda;</li>
+<li>cómo se evita consumir contexto innecesario.</li>
+</ul>
+</section>
+<section id="formalización-de-goals" class="level2" data-number="23.4">
+<h2 data-number="23.4" class="anchored" data-anchor-id="formalización-de-goals"><span class="header-section-number">23.4</span> 22.4 Formalización de Goals</h2>
+<p>El Goal puede comenzar siendo informal.</p>
+<p>Más adelante habrá que decidir:</p>
+<ul>
+<li>cuándo debe formalizarse;</li>
+<li>cómo expresa criterios de satisfacción;</li>
+<li>cómo se relaciona con Subgoals;</li>
+<li>cómo se valida;</li>
+<li>cómo se registra su evolución.</li>
+</ul>
+</section>
+<section id="resultados-de-validación" class="level2" data-number="23.5">
+<h2 data-number="23.5" class="anchored" data-anchor-id="resultados-de-validación"><span class="header-section-number">23.5</span> 22.5 Resultados de validación</h2>
+<p>Además de <code>pass</code> y <code>fail</code>, probablemente hagan falta estados como:</p>
+<pre class="text"><code>inconclusive
+blocked
+not_applicable
+skipped</code></pre>
+<p>Todavía no se han fijado.</p>
+</section>
+</section>
+<section id="principios-que-empiezan-a-emerger" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> 23. Principios que empiezan a emerger</h1>
+<p>Sin pretender convertirlos todavía en reglas definitivas, de la conversación emergen varios principios:</p>
+<ol type="1">
+<li><strong>Una única fuente de verdad.</strong></li>
+<li><strong>Los Inputs pertenecen al trabajo concreto.</strong></li>
+<li><strong>Las Sources existen independientemente del proyecto.</strong></li>
+<li><strong>El conocimiento compartido se referencia, no se copia.</strong></li>
+<li><strong>Las Specifications normalizan conocimiento y conservan metadata.</strong></li>
+<li><strong>Los metadatos aportan semántica operativa.</strong></li>
+<li><strong>El Sistema Inteligente puede descubrir y planificar, pero no inventar información ausente.</strong></li>
+<li><strong>El humano puede conservar el control sobre la planificación.</strong></li>
+<li><strong>Las Tasks son unidades de trabajo, no objetivos.</strong></li>
+<li><strong>Completar Tasks no implica alcanzar el Goal.</strong></li>
+<li><strong>Los Outputs no equivalen al Outcome real.</strong></li>
+<li><strong>La validación es parte del proceso.</strong></li>
+<li><strong>El fallo produce conocimiento.</strong></li>
+<li><strong>El conocimiento nuevo realimenta Inputs y Specifications.</strong></li>
+<li><strong>La planificación puede regenerarse a medida que evoluciona el conocimiento.</strong></li>
+<li><strong>IASI es iterativo por necesidad de ingeniería, no por ceremonia.</strong></li>
+</ol>
+</section>
+<section id="modelo-resumido" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> 24. Modelo resumido</h1>
+<p>La formulación provisional más compacta sería:</p>
+<pre class="text"><code>Sources ───────┐
+               ├────&gt; Specifications ─────&gt; Goal / Subgoals
+Inputs ────────┘                                  │
+                                                 ↓
+                                               Tasks
+                                                 ↓
+                                             Execution
+                                                 ↓
+                                      Outputs + Outcomes
+                                                 ↓
+                                             Validation
+                                                 ↓
+                                           New knowledge
+                                                 │
+                         ┌───────────────────────┴──────────────┐
+                         ↓                                      ↓
+                  Inputs / inferred                    Specifications
+                         │                                      │
+                         └──────────────&gt; Replan &lt;───────────────┘</code></pre>
+<p>La metodología no exige que cada pieza esté siempre formalizada al máximo.</p>
+<p>Sí exige que se preserve su significado y que no se confundan conceptos distintos.</p>
+<hr>
+<p><strong>Nota de trabajo:</strong> este documento es deliberadamente provisional. La próxima revisión debería centrarse en decidir cómo se expresan formalmente <code>Goal</code>, <code>Task</code>, <code>uses</code>, <code>Authority</code> y las relaciones entre Specifications sin convertir el modelo en algo innecesariamente rígido.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

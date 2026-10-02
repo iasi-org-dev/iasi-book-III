@@ -37,18 +37,31 @@ Si un documento se deriva de unas definitions, modificar manualmente el resultad
 
 Por eso IASI intenta conservar una cadena de procedencia:
 
-```text
-fuente
-  ↓
-interpretación
-  ↓
-decisión
-  ↓
-trabajo
-  ↓
-resultado
-  ↓
-evidencia
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam shadowing false
+
+skinparam rectangle {
+  BackgroundColor #FFF4B8
+  BorderColor #666666
+}
+
+rectangle "fuente" as fuente
+rectangle "interpretación" as interpretacion
+rectangle "decisión" as decision
+rectangle "trabajo" as trabajo
+rectangle "resultado" as resultado
+rectangle "evidencia" as evidencia
+
+fuente --> interpretacion
+interpretacion --> decision
+decision --> trabajo
+trabajo --> resultado
+resultado --> evidencia
+
+@enduml
 ```
 
 La trazabilidad no pretende registrar cada token producido por un modelo.

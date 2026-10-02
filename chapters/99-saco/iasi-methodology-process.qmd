@@ -1,0 +1,1048 @@
+---
+title: "IASI como metodología y proceso"
+subtitle: "Inputs, Sources, Specifications, Goals, Tasks, Outputs y ciclos de aprendizaje"
+author: "IASI"
+date: "2026-09-29"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+---
+
+# Estado de este documento
+
+Este documento recoge el modelo conceptual discutido para **IASI como metodología y proceso**, separándolo deliberadamente de sus implementaciones concretas, herramientas, CLI, repositorios o tecnologías.
+
+No pretende cerrar todavía una ontología formal. Su finalidad es fijar las piezas que ya encajan, conservar las preguntas abiertas y proporcionar una base sobre la que seguir refinando la metodología.
+
+La idea central es que IASI no debe definirse por una herramienta concreta. Git, GitHub, Quarto, TOML, PowerShell, Go o cualquier Sistema Inteligente son mecanismos posibles. La metodología debe seguir siendo válida aunque cualquiera de ellos cambie.
+
+# 1. Punto de partida
+
+IASI trabaja con conocimiento heterogéneo y lo transforma en conocimiento utilizable para realizar ingeniería.
+
+El esquema más simple del que partimos es:
+
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+
+inputs --> specs
+@enduml
+```
+
+Pero este modelo resulta insuficiente en cuanto aparece conocimiento que **no pertenece al proyecto concreto** y que, sin embargo, debe ser utilizado.
+
+Ejemplos:
+
+- normas de codificación de una organización;
+- convenciones de logging;
+- códigos de retorno;
+- naming conventions;
+- design system;
+- paleta de colores;
+- arquitectura corporativa;
+- políticas de seguridad;
+- utilidades comunes;
+- estándares técnicos;
+- documentación externa.
+
+Eso conduce al concepto de **Sources**.
+
+# 2. Inputs
+
+## 2.1 Qué es un Input
+
+Un **Input** es información propia del proyecto, iniciativa o trabajo concreto.
+
+No implica ningún formato determinado.
+
+Puede ser:
+
+- una conversación;
+- texto libre;
+- un correo;
+- un PDF;
+- una imagen;
+- un documento;
+- código;
+- un ticket;
+- un requisito;
+- una observación;
+- una decisión explícita;
+- cualquier otra forma de información.
+
+Por tanto:
+
+> **Input es una categoría metodológica, no un formato físico.**
+
+El formato es únicamente su representación.
+
+## 2.2 Inputs explícitos e inferidos
+
+Un Input puede haber sido proporcionado explícitamente o aparecer durante el propio proceso.
+
+Un conocimiento descubierto durante el trabajo puede registrarse, por ejemplo, como un Input inferido:
+
+```text
+inputs/
+  authored/
+  inferred/
+```
+
+La denominación y estructura física definitiva puede cambiar. Lo importante es conservar la diferencia semántica entre:
+
+- información proporcionada explícitamente;
+- información legítimamente inferida durante el proceso.
+
+Un principio importante es:
+
+> **Inferir no es inventar.**
+
+Si existen varias interpretaciones plausibles y la evidencia no permite resolverlas, el Sistema Inteligente no debe elegir arbitrariamente una.
+
+# 3. Sources
+
+## 3.1 Por qué aparecen las Sources
+
+Una organización puede disponer de cientos de megabytes de normas, arquitectura, guías, componentes, ejemplos y conocimiento reutilizable.
+
+No tiene sentido copiar todo ese conocimiento dentro de cada proyecto.
+
+Por ejemplo, al construir una aplicación web con backend no sería razonable volver a especificar en cada proyecto:
+
+- formato corporativo de logs;
+- niveles de logging;
+- colores;
+- tipografía;
+- convenciones REST;
+- formato de errores;
+- políticas de seguridad;
+- naming conventions.
+
+Ese conocimiento ya existe en otro ámbito.
+
+Por tanto aparece:
+
+> **Source: fuente accesible de conocimiento que existe independientemente del proyecto concreto.**
+
+## 3.2 Una Source no implica una tecnología
+
+Una Source puede estar en:
+
+- GitHub;
+- GitLab;
+- filesystem;
+- SharePoint;
+- una API;
+- una base de datos;
+- un repositorio documental;
+- una URL;
+- un catálogo interno;
+- cualquier otro mecanismo accesible.
+
+Metodológicamente importa que pueda ser identificada, consultada y entendida, no dónde esté alojada.
+
+## 3.3 Scope de las Sources
+
+Una Source puede pertenecer a distintos ámbitos:
+
+- IASI;
+- organización;
+- departamento;
+- programa;
+- producto;
+- plataforma;
+- dominio;
+- equipo;
+- ecosistema externo.
+
+Por tanto, una Source no es necesariamente “del proyecto”.
+
+## 3.4 Authority
+
+No todas las Sources tienen el mismo peso.
+
+Una política corporativa vigente no tiene la misma autoridad que un README antiguo o un ejemplo encontrado en Internet.
+
+Por eso aparece el concepto de:
+
+> **Authority: autoridad atribuida a una Source o a conocimiento procedente de ella.**
+
+Todavía queda por formalizar cómo se expresa y resuelve esa autoridad.
+
+Lo importante es que el Sistema Inteligente puede decidir qué información parece relevante, pero no debería decidir libremente que una norma obligatoria deja de ser obligatoria.
+
+# 4. Sources e Inputs
+
+Una Source puede actuar como **fuente de Inputs**.
+
+Ejemplo:
+
+- Jira puede ser una Source;
+- determinados tickets recuperados de Jira pueden convertirse en Inputs de un proyecto.
+
+Pero una Source también puede aportar conocimiento directamente al proceso de especificación sin convertirse conceptualmente en Input propio del proyecto.
+
+Por tanto existen al menos dos caminos:
+
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Sources" as sources
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+
+sources --> inputs : aporta
+inputs --> specs : normaliza
+sources --> specs : referencia / aporta contexto
+@enduml
+```
+
+Esto permite mantener una separación clara:
+
+- **Inputs**: conocimiento propio del proyecto;
+- **Sources**: conocimiento accesible y reutilizable que existe fuera de él.
+
+# 5. Una única fuente de verdad
+
+El conocimiento autoritativo no debe copiarse innecesariamente dentro de cada proyecto.
+
+Si una organización dispone de una norma corporativa de logging, copiarla en trescientos proyectos genera:
+
+- duplicación;
+- divergencia;
+- versiones obsoletas;
+- problemas de mantenimiento;
+- consumo innecesario de contexto y tokens.
+
+La regla es:
+
+> **El conocimiento compartido permanece en su Source autoritativa. El proyecto lo referencia.**
+
+Por ejemplo:
+
+```yaml
+uses:
+  - org://logging/backend
+  - org://design/colors
+  - org://security/web
+```
+
+`uses` expresa una relación.
+
+No significa:
+
+- copiar el contenido;
+- apropiarse de la Source;
+- crear una segunda fuente de verdad.
+
+Significa aproximadamente:
+
+> Esta unidad de conocimiento reconoce y utiliza estas Sources como contexto pertinente.
+
+# 6. Acceso bajo demanda
+
+Un Sistema Inteligente no necesita cargar 500 MB de normas para crear un pequeño script.
+
+Debe disponer de **acceso** al corpus y resolver únicamente el conocimiento necesario para la tarea que está realizando.
+
+```{.plantuml}
+@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Organization Sources\n500 MB" as sources
+rectangle "Discovery / Retrieval" as retrieve
+rectangle "Relevant knowledge" as relevant
+rectangle "Current work" as work
+
+sources --> retrieve
+retrieve --> relevant : solo lo necesario
+relevant --> work
+@enduml
+```
+
+El subconjunto recuperado puede ser efímero.
+
+No es necesario materializarlo como una copia persistente dentro del proyecto si la Source original sigue siendo accesible.
+
+# 7. Specifications
+
+## 7.1 De información libre a conocimiento normalizado
+
+Los Inputs pueden ser heterogéneos y estar en formato libre.
+
+IASI normaliza el resultado de su interpretación en **Specifications**.
+
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs\nformato libre" as inputs
+rectangle "Interpretation /\nNormalization" as normalize
+rectangle "Specifications\nnormalizadas" as specs
+
+inputs --> normalize
+normalize --> specs
+@enduml
+```
+
+Las Sources también pueden participar en esa normalización.
+
+## 7.2 `.iasi`
+
+Una representación prevista para las Specifications es un documento `.iasi` basado en:
+
+- Markdown para el contenido;
+- front matter para los metadatos.
+
+La metodología no depende de Markdown ni del front matter. Son mecanismos físicos convenientes para expresar el modelo.
+
+Su ventaja es que resultan:
+
+- legibles por humanos;
+- fáciles de procesar por máquinas;
+- fáciles de interpretar por Sistemas Inteligentes;
+- transportables;
+- versionables;
+- extensibles.
+
+## 7.3 Contenido y metadatos
+
+IASI distingue dos planos:
+
+**Contenido**
+
+Responde a:
+
+> ¿Qué dice esto?
+
+**Metadatos**
+
+Responden a:
+
+> ¿Qué es esto y cómo debe tratarse?
+
+Los metadatos son fundamentales porque dos documentos sintácticamente similares pueden tener significados metodológicos completamente distintos.
+
+Entre los candidatos a metadata aparecen:
+
+```yaml
+id:
+type:
+source:
+authority:
+status:
+version:
+scope:
+owner:
+created:
+updated:
+validity:
+relations:
+dependencies:
+uses:
+```
+
+La lista no está cerrada.
+
+## 7.4 El `id`
+
+El identificador es especialmente importante.
+
+Permite:
+
+- referenciar una Specification;
+- relacionarla con otras;
+- establecer trazabilidad;
+- evitar depender del nombre físico de un fichero;
+- construir relaciones estables.
+
+# 8. El proyecto no nace completamente especificado
+
+Incluso en un caso pequeño sería utópico esperar que toda la casuística estuviera correctamente definida desde el primer momento.
+
+Ejemplo: crear `iasi-tools` mediante PowerShell.
+
+Durante el trabajo pueden aparecer:
+
+- dependencias no previstas;
+- restricciones desconocidas;
+- casos límite;
+- contradicciones;
+- decisiones pendientes;
+- fallos de ejecución;
+- nuevas condiciones de aceptación.
+
+Por tanto:
+
+> **Especificar no es únicamente una fase inicial. Es una actividad continua.**
+
+# 9. Goal
+
+## 9.1 Por qué necesitamos Goal
+
+Un proyecto puede completar muchas Tasks y, aun así, no haber conseguido aquello que pretendía.
+
+Ejemplo:
+
+se pueden completar quince tareas relacionadas con la creación de `hyper-v.ps1`, pero no haber creado realmente ninguna máquina virtual.
+
+Por eso debe existir, formal o informalmente, una respuesta a:
+
+> **¿Qué quiero conseguir?**
+
+Eso es el **Goal**.
+
+## 9.2 Goal no es Specification
+
+Una Specification describe condiciones, propiedades o conocimiento que debe cumplirse.
+
+Un Goal expresa el estado o resultado que queremos alcanzar.
+
+Ejemplo:
+
+```text
+Goal:
+  Tener una máquina iasi-tools operativa.
+
+Specifications:
+  Los mensajes PowerShell incluyen hora.
+  Los mensajes usan las convenciones de color corporativas.
+  Los códigos de retorno siguen el criterio establecido.
+  Docker debe quedar operativo.
+```
+
+## 9.3 Goal formal o informal
+
+Un Goal puede ser:
+
+- explícito y formal;
+- explícito pero informal;
+- inferido;
+- refinado durante el proceso.
+
+No todo debe formalizarse matemáticamente desde el principio.
+
+La metodología debe permitir distintos grados de formalización.
+
+# 10. Subgoals
+
+Un Goal puede descomponerse en **Subgoals**.
+
+Ejemplo:
+
+```text
+Goal:
+  Tener iasi-tools operativa.
+
+Subgoals:
+  - Tener la VM creada.
+  - Tener el sistema operativo instalado.
+  - Poder conectarse.
+  - Tener Docker arrancado.
+```
+
+Pero:
+
+> **Un Subgoal no es el Goal.**
+
+Cumplir un Subgoal no implica necesariamente haber alcanzado el Goal global.
+
+# 11. Tasks
+
+## 11.1 El sistema ejecuta Tasks
+
+El trabajo operativo se expresa mediante **Tasks**.
+
+Una Task puede ser creada por:
+
+- una persona;
+- un Sistema Inteligente;
+- una planificación automática;
+- otro proceso.
+
+El origen no cambia su naturaleza metodológica.
+
+## 11.2 Specifications y Tasks
+
+Una Specification dice, aproximadamente:
+
+> qué debe ser cierto.
+
+Una Task dice:
+
+> qué hay que hacer.
+
+Ejemplo:
+
+```text
+Specification:
+  Los scripts PowerShell deben emitir mensajes según
+  las convenciones corporativas.
+
+Task:
+  Crear un ps1 que emita mensajes según esas convenciones
+  y devuelva diferentes códigos de retorno.
+```
+
+## 11.3 El SI puede planificar
+
+Dado suficiente conocimiento del proyecto, se puede pedir al Sistema Inteligente:
+
+> Fasea este proyecto y dame una lista de Tasks sensatas.
+
+La descomposición no es única.
+
+Por ejemplo, para Jira se pueden pedir:
+
+- tareas de una semana;
+- tareas de quince días;
+- tareas por componente;
+- tareas por riesgo;
+- tareas por sprint;
+- tareas según dependencias.
+
+Las Specifications pueden permanecer iguales mientras cambia la estrategia de planificación.
+
+```{.plantuml}
+@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Specifications" as specs
+rectangle "Goal" as goal
+rectangle "Planning criteria" as criteria
+rectangle "Tasks" as tasks
+
+specs --> tasks
+goal --> tasks
+criteria --> tasks
+@enduml
+```
+
+## 11.4 El humano mantiene el control
+
+El Sistema Inteligente puede proponer Tasks, pero no monopoliza la planificación.
+
+Una persona puede:
+
+- crear Tasks;
+- modificar Tasks;
+- dividirlas;
+- agruparlas;
+- reordenarlas;
+- descartarlas;
+- definir su granularidad.
+
+# 12. Outputs
+
+Las Tasks producen **Outputs**.
+
+En la implementación actual de IASI, esos resultados derivados se materializan en `_outputs`.
+
+```text
+Task
+  ↓
+Execution
+  ↓
+_outputs/
+```
+
+Los Outputs son derivados y regenerables.
+
+No deben convertirse accidentalmente en la fuente de verdad.
+
+# 13. Output no es Outcome
+
+Es necesario distinguir:
+
+- **Output**: artefacto producido por una Task;
+- **Outcome**: estado real conseguido.
+
+Ejemplo:
+
+```text
+Output:
+  _outputs/hyper-v.ps1
+
+Outcome:
+  existe una VM iasi-tools,
+  arranca,
+  permite login,
+  Docker está activo.
+```
+
+Un `hyper-v.ps1` sintácticamente perfecto puede existir y, sin embargo, la VM no funcionar.
+
+Por tanto:
+
+> **Output correcto no implica Goal alcanzado.**
+
+# 14. Validación
+
+## 14.1 ¿Quién dice que una Task ha ido bien?
+
+Una Task no debería considerarse correcta únicamente porque terminó de ejecutarse.
+
+Es necesario validar su resultado.
+
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Task" as task
+rectangle "Execution" as exec
+rectangle "Outputs" as outputs
+rectangle "Validation" as validation
+rectangle "Pass / Fail /\nInconclusive" as result
+
+task --> exec
+exec --> outputs
+outputs --> validation
+validation --> result
+@enduml
+```
+
+La validación puede realizarla:
+
+- una herramienta;
+- un test;
+- una persona;
+- un Sistema Inteligente;
+- otro Sistema Inteligente;
+- una combinación de varios mecanismos.
+
+## 14.2 Niveles de validación
+
+Pueden existir diferentes niveles:
+
+**Task validation**
+
+> ¿La tarea se ejecutó correctamente?
+
+**Subgoal validation**
+
+> ¿Se alcanzó este estado intermedio?
+
+**Goal validation**
+
+> ¿Se consiguió realmente lo que se quería?
+
+No deben confundirse.
+
+# 15. Ejemplo: creación de `iasi-tools`
+
+Supongamos el Goal:
+
+```text
+Tener una VM iasi-tools creada, arrancada, accesible y con Docker operativo.
+```
+
+Posibles Tasks:
+
+```text
+- Crear funciones de mensajes.
+- Implementar códigos de retorno.
+- Obtener la ISO necesaria.
+- Generar configuración de autoinstall.
+- Crear la VM.
+- Arrancar la VM.
+- Verificar instalación.
+- Verificar login.
+- Verificar red.
+- Verificar Docker.
+```
+
+Puede ocurrir:
+
+```text
+Task: crear hyper-v.ps1
+Status: PASS
+```
+
+pero:
+
+```text
+Subgoal: VM arrancada
+Status: FAIL
+```
+
+El artefacto puede haberse creado correctamente y, sin embargo, el sistema real no haber alcanzado el estado deseado.
+
+# 16. El fallo genera conocimiento
+
+Cuando una Task falla, no debe suponerse automáticamente que basta con modificar la propia Task.
+
+El fallo puede revelar que:
+
+- falta un Input;
+- un Input era incorrecto;
+- debe crearse un Input inferido;
+- falta una Specification;
+- una Specification es ambigua;
+- una Specification es incorrecta;
+- existen Sources contradictorias;
+- falta una Source;
+- el Goal estaba incompleto;
+- un Subgoal necesita refinarse.
+
+Por tanto el fallo realimenta el conocimiento del proyecto.
+
+```{.plantuml}
+@startuml
+top to bottom direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Inputs + Sources" as inputs
+rectangle "Specifications" as specs
+rectangle "Goal / Subgoals" as goals
+rectangle "Tasks" as tasks
+rectangle "Execution" as execution
+rectangle "Validation" as validation
+diamond "Valid?" as valid
+rectangle "Refine knowledge" as refine
+rectangle "Replan" as replan
+
+inputs --> specs
+specs --> goals
+specs --> tasks
+goals --> tasks
+tasks --> execution
+execution --> validation
+validation --> valid
+
+valid --> tasks : yes / next work
+valid --> refine : no
+
+refine --> inputs : new/refined input
+refine --> specs : new/refined specification
+refine --> goals : if needed
+
+inputs --> replan
+specs --> replan
+goals --> replan
+replan --> tasks
+@enduml
+```
+
+# 17. Iteración
+
+La iteración no existe porque la metodología diga simplemente “hay que iterar”.
+
+La iteración aparece porque la ejecución del trabajo produce conocimiento nuevo.
+
+El ciclo general puede expresarse como:
+
+```text
+Execute
+   ↓
+Validate
+   ↓
+Learn
+   ↓
+Refine
+   ↓
+Replan
+   ↓
+Execute again
+```
+
+IASI es por tanto un proceso iterativo y recursivo.
+
+# 18. Bloqueos y ausencia de imaginación
+
+El Sistema Inteligente no debe rellenar arbitrariamente la información que falta.
+
+Si aparece una duda que no puede resolverse con:
+
+- Inputs;
+- Sources;
+- Specifications;
+- inferencias suficientemente justificadas;
+
+debe detener ese camino.
+
+Ejemplos conceptuales:
+
+```text
+Blocked:
+  missing_input
+```
+
+```text
+Blocked:
+  specification_ambiguity
+```
+
+```text
+Blocked:
+  conflicting_sources
+```
+
+El bloqueo también es información.
+
+Puede desencadenar:
+
+- solicitud de un nuevo Input;
+- revisión de una Specification;
+- consulta de una nueva Source;
+- resolución humana;
+- replanteamiento de una Task.
+
+# 19. Vista consolidada
+
+La fotografía conceptual provisional puede resumirse así:
+
+```{.plantuml}
+@startuml
+left to right direction
+
+skinparam rectangle {
+  BackgroundColor #FFF4CC
+  BorderColor #666666
+}
+
+rectangle "Sources" as sources
+rectangle "Inputs" as inputs
+rectangle "Specifications" as specs
+rectangle "Goal /\nSubgoals" as goals
+rectangle "Tasks" as tasks
+rectangle "Execution" as execution
+rectangle "_outputs" as outputs
+rectangle "Validation" as validation
+rectangle "Outcome" as outcome
+
+sources --> inputs : puede aportar
+sources --> specs : references / uses
+inputs --> specs : normalize
+specs --> goals : inform
+specs --> tasks : constrain
+goals --> tasks : orient
+tasks --> execution
+execution --> outputs
+execution --> outcome
+outputs --> validation
+outcome --> validation
+validation --> inputs : findings / inferred
+validation --> specs : refine
+validation --> tasks : replan
+validation --> goals : refine if needed
+@enduml
+```
+
+# 20. Relaciones conceptuales importantes
+
+Hasta este punto conviene conservar explícitamente estas desigualdades:
+
+```text
+Input            != Source
+Source           != Specification
+Specification    != Task
+Task             != Goal
+Subgoal          != Goal
+Task completed   != Goal achieved
+Output           != Outcome
+Inference        != Invention
+Reference        != Copy
+```
+
+Estas diferencias parecen pequeñas, pero evitan mezclar conocimiento, trabajo, artefactos y objetivos.
+
+# 21. Papel de `uses`
+
+`uses` aparece como un candidato especialmente útil para los metadatos.
+
+Ejemplo:
+
+```yaml
+---
+id: backend-service
+uses:
+  - org://logging/backend
+  - org://security/web
+  - org://design/colors
+---
+```
+
+Permite que un documento ligero del proyecto deje constancia de:
+
+- qué Sources considera pertinentes;
+- qué conocimiento externo debe resolver un SI;
+- qué referencias participaron en la interpretación;
+- qué autoridad externa condiciona el trabajo.
+
+Todo ello sin duplicar el contenido de las Sources.
+
+# 22. Cuestiones abiertas
+
+Este modelo todavía deja asuntos por resolver deliberadamente.
+
+## 22.1 Versionado de referencias
+
+Una referencia podría significar:
+
+```text
+org://logging/backend
+```
+
+es decir:
+
+> utilizar la versión vigente.
+
+O podría fijar:
+
+```text
+org://logging/backend@3.2
+```
+
+es decir:
+
+> utilizar exactamente esta versión.
+
+Esto enfrenta dos necesidades:
+
+- seguir automáticamente la norma vigente;
+- reproducir exactamente el contexto histórico utilizado.
+
+## 22.2 Semántica de Authority
+
+Falta definir:
+
+- niveles;
+- precedencia;
+- conflictos;
+- scope;
+- posibles overrides;
+- reglas de herencia.
+
+## 22.3 Descubrimiento de Sources
+
+El SI puede determinar qué Sources parecen relevantes.
+
+Pero sigue pendiente definir:
+
+- cómo se descubren;
+- qué Sources son obligatorias;
+- cuáles son opcionales;
+- cómo se limita el universo de búsqueda;
+- cómo se evita consumir contexto innecesario.
+
+## 22.4 Formalización de Goals
+
+El Goal puede comenzar siendo informal.
+
+Más adelante habrá que decidir:
+
+- cuándo debe formalizarse;
+- cómo expresa criterios de satisfacción;
+- cómo se relaciona con Subgoals;
+- cómo se valida;
+- cómo se registra su evolución.
+
+## 22.5 Resultados de validación
+
+Además de `pass` y `fail`, probablemente hagan falta estados como:
+
+```text
+inconclusive
+blocked
+not_applicable
+skipped
+```
+
+Todavía no se han fijado.
+
+# 23. Principios que empiezan a emerger
+
+Sin pretender convertirlos todavía en reglas definitivas, de la conversación emergen varios principios:
+
+1. **Una única fuente de verdad.**
+2. **Los Inputs pertenecen al trabajo concreto.**
+3. **Las Sources existen independientemente del proyecto.**
+4. **El conocimiento compartido se referencia, no se copia.**
+5. **Las Specifications normalizan conocimiento y conservan metadata.**
+6. **Los metadatos aportan semántica operativa.**
+7. **El Sistema Inteligente puede descubrir y planificar, pero no inventar información ausente.**
+8. **El humano puede conservar el control sobre la planificación.**
+9. **Las Tasks son unidades de trabajo, no objetivos.**
+10. **Completar Tasks no implica alcanzar el Goal.**
+11. **Los Outputs no equivalen al Outcome real.**
+12. **La validación es parte del proceso.**
+13. **El fallo produce conocimiento.**
+14. **El conocimiento nuevo realimenta Inputs y Specifications.**
+15. **La planificación puede regenerarse a medida que evoluciona el conocimiento.**
+16. **IASI es iterativo por necesidad de ingeniería, no por ceremonia.**
+
+# 24. Modelo resumido
+
+La formulación provisional más compacta sería:
+
+```text
+Sources ───────┐
+               ├────> Specifications ─────> Goal / Subgoals
+Inputs ────────┘                                  │
+                                                 ↓
+                                               Tasks
+                                                 ↓
+                                             Execution
+                                                 ↓
+                                      Outputs + Outcomes
+                                                 ↓
+                                             Validation
+                                                 ↓
+                                           New knowledge
+                                                 │
+                         ┌───────────────────────┴──────────────┐
+                         ↓                                      ↓
+                  Inputs / inferred                    Specifications
+                         │                                      │
+                         └──────────────> Replan <───────────────┘
+```
+
+La metodología no exige que cada pieza esté siempre formalizada al máximo.
+
+Sí exige que se preserve su significado y que no se confundan conceptos distintos.
+
+---
+
+**Nota de trabajo:** este documento es deliberadamente provisional. La próxima revisión debería centrarse en decidir cómo se expresan formalmente `Goal`, `Task`, `uses`, `Authority` y las relaciones entre Specifications sin convertir el modelo en algo innecesariamente rígido.

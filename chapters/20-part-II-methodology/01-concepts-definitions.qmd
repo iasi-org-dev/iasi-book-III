@@ -1,0 +1,308 @@
+---
+title: "Conceptos y definiciones"
+navbar-title: "Conceptos y definiciones"
+---
+
+Este capítulo establece el vocabulario de la metodología IASI.
+
+Las definiciones no pretenden crear simples etiquetas para ficheros. Su objetivo es fijar las propiedades semánticas que permiten razonar sobre la información: qué dice, de dónde procede, quién tiene autoridad sobre ella, cómo ha sido obtenida, si puede modificarse, regenerarse o descartarse, y cuál es su papel dentro de un proceso IASI.
+
+Un principio fundamental es que estas propiedades **no constituyen necesariamente un único tipo**. IASI debe distinguir dimensiones independientes en lugar de comprimirlas en una clasificación plana.
+
+## Resumen de conceptos
+
+```{r}
+#| echo: false
+#| results: asis
+
+conceptos <- data.frame(
+  concepto = c(
+    "[Adopción (`Adoption`)](#adopcion)",
+    "[Artefacto (`Artifact`)](#artefacto)",
+    "[Artefacto fuente (`Source Artifact`)](#artefacto-fuente)",
+    "[Autoridad (`Authority`)](#autoridad)",
+    "[Autoría asumida (`Authored`)](#autoria-asumida)",
+    "[Canónico (`Canonical`)](#canonico)",
+    "[Contenido (`Content`)](#contenido)",
+    "[Derivado (`Derived`)](#derivado)",
+    "[Desechable (`Disposable`)](#desechable)",
+    "[Efímero (`Ephemeral`)](#efimero)",
+    "[Externo (`External`)](#externo)",
+    "[Inferido (`Inferred`)](#inferido)",
+    "[Materialización (`Materialization`)](#materializacion)",
+    "[Metadatos (`Metadata`)](#metadatos)",
+    "[Procedencia (`Provenance`)](#procedencia)",
+    "[Regenerable (`Regenerable`)](#regenerable)"
+  ),
+  resumen = c(
+    "Aceptación explícita de información dentro de una frontera de autoridad.",
+    "Unidad identificable de información, conocimiento, configuración, evidencia o resultado que participa en IASI.",
+    "Artefacto que actúa como entrada de un proceso de interpretación, razonamiento, transformación o materialización.",
+    "Capacidad reconocida para establecer el significado o estado aceptado de un artefacto dentro de un ámbito.",
+    "Contenido deliberadamente afirmado, aceptado o mantenido dentro de una frontera de autoridad IASI.",
+    "Artefacto o representación designado como referencia dentro de un ámbito concreto.",
+    "Lo que un artefacto dice o contiene.",
+    "Artefacto producido a partir de otros mediante una transformación definida.",
+    "Artefacto que puede eliminarse sin destruir información autoritativa.",
+    "Artefacto cuya vida útil está concebida como temporal.",
+    "Contenido cuya fuente autoritativa se encuentra fuera de la frontera de autoridad IASI considerada.",
+    "Información obtenida mediante razonamiento a partir de otras evidencias y no mediante afirmación explícita de una fuente autoritativa.",
+    "Proceso de producir artefactos concretos a partir de fuentes, metadatos, reglas y transformaciones.",
+    "Información que describe qué es un artefacto y cómo debe ser interpretado o tratado.",
+    "Rastro de dónde procede la información y de las transformaciones o decisiones que la han llevado a su estado actual.",
+    "Artefacto que puede reconstruirse a partir de entradas autoritativas y reglas de transformación conocidas."
+  ),
+  stringsAsFactors = FALSE
+)
+
+conceptos <- conceptos[order(conceptos$concepto), ]
+
+knitr::kable(
+  conceptos,
+  col.names = c("Concepto", "Resumen"),
+  align = c("l", "l"),
+  escape = FALSE
+)
+```
+
+## Adopción (`Adoption`) {#adopcion}
+
+La **adopción** es el acto explícito mediante el cual un actor con autoridad acepta información dentro de una frontera de autoridad.
+
+Es especialmente importante para información inferida o externa.
+
+Por ejemplo, un Sistema Inteligente puede inferir una restricción a partir de varios requisitos. Esa conclusión conserva su origen inferido. Si el ingeniero responsable la revisa y la acepta como parte de la especificación, pasa a ser autoritativa dentro del ámbito correspondiente.
+
+La adopción añade autoridad, pero **no debe borrar la procedencia**.
+
+## Artefacto (`Artifact`) {#artefacto}
+
+Un **artefacto** es una unidad identificable de información, conocimiento, especificación, configuración, evidencia o resultado que participa en un proceso IASI.
+
+Puede estar representado por un fichero, un fragmento documental, un registro, un recurso externo, un activo generado u otra unidad direccionable.
+
+La representación física no define por sí sola la naturaleza metodológica del artefacto.
+
+## Artefacto fuente (`Source Artifact`) {#artefacto-fuente}
+
+Un **artefacto fuente** es un artefacto que participa como entrada de un proceso de interpretación, razonamiento, transformación o materialización.
+
+No tiene por qué ser `Authored`. Puede ser externo, inferido y posteriormente adoptado, o cualquier otra fuente aceptada por el proceso.
+
+**Fuente describe un papel en un proceso, no una autoridad.**
+
+## Autoridad (`Authority`) {#autoridad}
+
+La **autoridad** identifica quién o qué está legitimado para establecer el significado o estado aceptado de un artefacto dentro de un ámbito determinado.
+
+No debe confundirse con:
+
+- autoría física;
+- posesión del fichero;
+- almacenamiento local;
+- modificación más reciente;
+- generación;
+- inferencia.
+
+Un artefacto puede estar almacenado localmente y seguir siendo autoritativamente externo.
+
+Una conclusión inferida puede ser útil sin poseer autoridad hasta que sea adoptada.
+
+## Autoría asumida (`Authored`) {#autoria-asumida}
+
+`Authored` describe contenido que ha sido **deliberadamente afirmado, aceptado o mantenido** dentro de una frontera de autoridad IASI.
+
+No significa simplemente «escrito por una persona».
+
+Un humano puede crear contenido con una participación extensa de un Sistema Inteligente y seguir asumiendo su autoría metodológica. Del mismo modo, un texto tecleado enteramente por una persona puede no ser `Authored` si es una nota temporal, una propuesta todavía no aceptada o una copia de una fuente externa.
+
+`Authored` implica, por tanto, **adopción consciente y responsabilidad**, no autoría mecánica de las palabras.
+
+## Canónico (`Canonical`) {#canonico}
+
+Un artefacto o representación es **canónico** cuando ha sido designado como referencia para un ámbito concreto.
+
+Canónico no significa universalmente autoritativo.
+
+Una especificación IASI puede ser canónica para una implementación y, al mismo tiempo, depender de una norma externa que sigue siendo la autoridad respecto a determinadas reglas.
+
+## Contenido (`Content`) {#contenido}
+
+El **contenido** es lo que un artefacto dice o contiene.
+
+Responde a la pregunta:
+
+> ¿Qué dice esto?
+
+Son contenido, por ejemplo, requisitos, decisiones de diseño, especificaciones, explicaciones, código fuente, diagramas, observaciones y conclusiones.
+
+El contenido es distinto de las reglas que determinan cómo debe interpretarse o tratarse ese contenido.
+
+## Derivado (`Derived`) {#derivado}
+
+`Derived` describe un artefacto producido a partir de otros artefactos mediante una transformación definida.
+
+Son ejemplos habituales:
+
+- HTML renderizado;
+- documentación generada;
+- esquemas compilados;
+- informes;
+- paquetes de release;
+- diagramas generados;
+- conversiones de formato;
+- índices calculados.
+
+Un derivado es normalmente **regenerable**. Su significado autoritativo procede de sus entradas y de las reglas de transformación, no de modificaciones manuales sobre el resultado generado.
+
+Por ello, una modificación directa de un artefacto derivado suele ser inválida o descartable: la corrección debe realizarse aguas arriba.
+
+## Desechable (`Disposable`) {#desechable}
+
+Un artefacto es **desechable** cuando puede eliminarse sin destruir información autoritativa.
+
+Los artefactos derivados y efímeros son frecuentemente desechables.
+
+Desechable no significa inútil. Un artefacto puede ser imprescindible durante una ejecución y, aun así, no constituir una fuente de verdad que deba conservarse.
+
+## Efímero (`Ephemeral`) {#efimero}
+
+`Ephemeral` describe un artefacto cuya vida útil está concebida intencionadamente como temporal.
+
+Ejemplos:
+
+- directorios de trabajo;
+- cachés;
+- ficheros intermedios;
+- resultados de cálculo temporales;
+- prompts transitorios;
+- exportaciones temporales;
+- áreas de staging.
+
+`Ephemeral` expresa principalmente una **propiedad de ciclo de vida**.
+
+Un artefacto puede ser a la vez derivado y efímero. También puede ser `Authored` y efímero, como una nota de trabajo todavía no incorporada al cuerpo durable de conocimiento.
+
+## Externo (`External`) {#externo}
+
+`External` describe contenido cuya fuente autoritativa se encuentra fuera de la frontera de autoridad IASI considerada.
+
+Pueden ser externos:
+
+- normas;
+- legislación;
+- documentación de fabricantes;
+- APIs mantenidas por terceros;
+- investigación publicada;
+- requisitos suministrados por un cliente;
+- repositorios propiedad de otra organización.
+
+IASI puede referenciar, copiar, almacenar en caché, anotar o derivar información de un artefacto externo.
+
+Una copia local **no transfiere silenciosamente la autoridad** al proyecto IASI.
+
+## Inferido (`Inferred`) {#inferido}
+
+`Inferred` describe información obtenida mediante razonamiento a partir de otras evidencias, en lugar de haber sido afirmada explícitamente por una fuente autoritativa.
+
+La inferencia puede ser producida por:
+
+- una persona;
+- un Sistema Inteligente;
+- un motor de reglas;
+- un analizador estático;
+- cualquier otro proceso de razonamiento.
+
+`Inferred` describe **cómo se obtuvo una afirmación**. Por sí solo, no concede autoridad.
+
+Una inferencia debería conservar suficiente procedencia para responder, cuando sea relevante, a preguntas como:
+
+- ¿a partir de qué evidencias se obtuvo?;
+- ¿qué proceso o agente realizó la inferencia?;
+- ¿bajo qué supuestos?;
+- ¿con qué grado de confianza?;
+- ¿ha sido revisada?;
+- ¿ha sido adoptada?
+
+Una afirmación inferida puede convertirse posteriormente en información autoritativa mediante adopción sin dejar de conservar su origen inferido.
+
+## Materialización (`Materialization`) {#materializacion}
+
+La **materialización** es el proceso de producir artefactos concretos a partir de artefactos fuente, metadatos, reglas y transformaciones.
+
+Los resultados materializados son normalmente derivados.
+
+Ejemplos:
+
+- HTML;
+- PDF;
+- presentaciones;
+- configuraciones generadas;
+- paquetes de distribución;
+- árboles de publicación.
+
+Materializar no significa crear una nueva fuente de verdad. Significa producir una representación utilizable a partir de fuentes y reglas conocidas.
+
+## Metadatos (`Metadata`) {#metadatos}
+
+Los **metadatos** describen el significado metodológico de un artefacto y cómo debe tratarse.
+
+Responden a preguntas como:
+
+> ¿Qué es esto?\
+> ¿De dónde procede?\
+> ¿Quién tiene autoridad sobre ello?\
+> ¿Puede modificarse?\
+> ¿Está vigente?\
+> ¿De qué depende?\
+> ¿Puede regenerarse?\
+> ¿Es temporal?
+
+Los metadatos forman parte de la semántica IASI aunque físicamente se representen mediante front matter, un fichero lateral, una base de datos, un grafo u otro mecanismo.
+
+**Front matter es una representación. Metadata es el concepto.**
+
+## Procedencia (`Provenance`) {#procedencia}
+
+La **procedencia** es el rastro de dónde proviene una información y cómo ha llegado a su forma actual.
+
+Puede incluir:
+
+- artefactos fuente;
+- referencias externas;
+- autores o agentes;
+- pasos de inferencia;
+- transformaciones;
+- versiones;
+- marcas temporales;
+- revisiones;
+- eventos de adopción.
+
+Responde a la pregunta:
+
+> ¿Cómo ha llegado esta información a ser lo que es ahora?
+
+La procedencia debe sobrevivir a las transformaciones y a la adopción. Ganar autoridad no debe borrar la historia de la información.
+
+## Regenerable (`Regenerable`) {#regenerable}
+
+Un artefacto es **regenerable** cuando puede volver a crearse a partir de entradas autoritativas y reglas de transformación definidas.
+
+La regenerabilidad es un fuerte indicio de que ese artefacto no debería convertirse en una fuente de verdad independiente.
+
+Si un resultado puede reconstruirse de manera fiable, la metodología debe favorecer la corrección de sus fuentes o reglas antes que la edición manual del resultado.
+
+## Distinciones fundamentales
+
+Estos conceptos están relacionados, pero no son sinónimos.
+
+En particular:
+
+- `Authored`, `External` e `Inferred` hablan de aspectos de origen, adopción o autoridad;
+- `Derived` habla de producción mediante transformación;
+- `Ephemeral` habla de ciclo de vida;
+- autoridad y procedencia son dimensiones distintas;
+- fuente describe un papel dentro de un proceso;
+- canónico describe una referencia dentro de un ámbito.
+
+IASI no debería colapsar estas dimensiones en un único campo `type` salvo que el modelo demuestre que esa simplificación conserva toda la semántica necesaria.

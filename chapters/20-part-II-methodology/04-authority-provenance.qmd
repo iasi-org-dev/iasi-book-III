@@ -1,0 +1,157 @@
+---
+title: "Autoridad y procedencia"
+navbar-title: "Autoridad y procedencia"
+---
+
+Autoridad y procedencia responden a preguntas diferentes.
+
+**Autoridad** pregunta quién puede establecer el significado aceptado.
+
+**Procedencia** pregunta de dónde viene la información y cómo ha llegado a su forma actual.
+
+Ambas son necesarias.
+
+## Autoridad no es autoría
+
+Una persona puede escribir un texto sin tener autoridad sobre su materia.
+
+Una herramienta puede generar un texto que posteriormente sea aceptado por un ingeniero con autoridad.
+
+Una norma externa copiada en local puede almacenarse dentro del proyecto sin convertirse en autoritativa internamente.
+
+Por tanto, la autoridad no puede inferirse de quién tecleó los caracteres.
+
+## Fronteras de autoridad
+
+IASI opera dentro de fronteras de autoridad explícitas o implícitas.
+
+Ejemplos:
+
+- un proyecto;
+- una organización;
+- un producto;
+- un dominio regulatorio;
+- un organismo externo de normalización;
+- una especificación controlada por un cliente.
+
+Un artefacto puede ser autoritativo en un ámbito y no serlo en otro.
+
+Por ejemplo, una especificación interna de API puede ser canónica y autoritativa para la implementación de un servicio y, al mismo tiempo, estar subordinada a una norma de protocolo externa que mantiene la autoridad sobre determinadas reglas.
+
+## La procedencia debe sobrevivir a las transformaciones
+
+Cuando la información atraviesa IASI, su historia no debe desaparecer.
+
+Consideremos:
+
+```text
+Regulación externa
+        |
+        v
+Análisis interno
+        |
+        v
+Inferencia del SI
+        |
+        v
+Revisión del ingeniero
+        |
+        v
+Requisito adoptado
+        |
+        v
+Informe de cumplimiento generado
+```
+
+Cada etapa modifica el papel o el estado de la información.
+
+El informe final no debería hacer invisible esa cadena.
+
+## Una inferencia necesita evidencia
+
+Una afirmación inferida debe poder trazarse hasta sus evidencias.
+
+Como mínimo, un modelo de inferencia debería poder representar:
+
+- artefactos de entrada;
+- agente o proceso de razonamiento;
+- supuestos;
+- contexto temporal o de versión;
+- confianza, cuando sea relevante;
+- estado de revisión;
+- estado de adopción.
+
+Esto es especialmente importante con Sistemas Inteligentes, porque un lenguaje fluido puede ocultar incertidumbre.
+
+IASI debe tratar la procedencia como dato de ingeniería, no como atribución decorativa.
+
+## La adopción añade autoridad
+
+La adopción es una transición.
+
+Antes de la adopción:
+
+```text
+afirmación inferida
+authority = none o provisional
+```
+
+Después de una revisión autorizada:
+
+```text
+misma afirmación
+origin = inferred
+authority = internal
+state = adopted
+```
+
+La procedencia original debe mantenerse intacta.
+
+IASI no debe reescribir la historia fingiendo que la información adoptada fue siempre directamente `Authored`.
+
+## La información externa puede adoptarse sin perder su origen
+
+Una afirmación externa puede convertirse en un requisito interno.
+
+Por ejemplo:
+
+```text
+cláusula de norma externa
+        |
+        v
+decisión interna de cumplimiento
+        |
+        v
+requisito del proyecto
+```
+
+El requisito del proyecto es autoritativo internamente.
+
+Su justificación sigue apuntando a la fuente externa.
+
+Esta separación permite a IASI responder a dos preguntas distintas:
+
+> ¿Por qué exigimos esto?
+
+Y:
+
+> ¿Quién es responsable actualmente de este requisito?
+
+## Conflictos de autoridad
+
+Pueden aparecer conflictos cuando:
+
+- un requisito interno contradice una restricción externa;
+- dos fuentes externas discrepan;
+- una conclusión inferida entra en conflicto con contenido `Authored`;
+- una representación derivada parece inconsistente con su fuente.
+
+IASI no debería resolver estos conflictos por fecha de fichero ni mediante precedencias arbitrarias.
+
+La metodología debe utilizar información explícita sobre autoridad y relaciones.
+
+## Principio
+
+**La autoridad determina quién puede decidir. La procedencia conserva cómo hemos llegado hasta allí.**
+
+La trazabilidad de ingeniería necesita ambas.

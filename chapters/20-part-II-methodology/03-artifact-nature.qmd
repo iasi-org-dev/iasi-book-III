@@ -1,0 +1,183 @@
+---
+title: "Naturaleza de los artefactos"
+navbar-title: "Naturaleza de los artefactos"
+---
+
+Los artefactos IASI no pueden comprenderse adecuadamente mediante una clasificación plana y única.
+
+Términos como `Authored`, `External`, `Inferred`, `Derived` y `Ephemeral` describen aspectos diferentes de un artefacto. Algunos se refieren a autoridad, otros a procedencia, producción o ciclo de vida.
+
+Tratarlos como valores mutuamente excluyentes de un único campo `type` ocultaría combinaciones importantes.
+
+## Un modelo multidimensional
+
+Un artefacto puede necesitar responder a varias preguntas independientes.
+
+### Origen
+
+¿Cómo entró la información en el sistema?
+
+Ejemplos posibles:
+
+- authored;
+- external;
+- inferred.
+
+### Autoridad
+
+¿Quién establece el significado aceptado?
+
+Ejemplos posibles:
+
+- interna;
+- externa;
+- ninguna;
+- delegada.
+
+### Producción
+
+¿Cómo se creó la representación actual?
+
+Ejemplos posibles:
+
+- creada directamente;
+- derivada;
+- materializada.
+
+### Ciclo de vida
+
+¿Cuál es su persistencia prevista?
+
+Ejemplos posibles:
+
+- durable;
+- efímera.
+
+### Estado
+
+¿Cuál es su estado metodológico actual?
+
+Ejemplos posibles:
+
+- draft;
+- reviewed;
+- adopted;
+- superseded;
+- obsolete.
+
+Estas dimensiones son ilustrativas. El esquema definitivo de metadatos debe emerger de la metodología, no al revés.
+
+## `Authored` es un acto de responsabilidad
+
+`Authored` significa que un artefacto o afirmación ha sido deliberadamente afirmado o adoptado dentro de la frontera de autoridad correspondiente.
+
+Esto permite una distinción importante:
+
+```text
+generado por SI
+      |
+      v
+revisado por ingeniero
+      |
+      v
+adoptado
+      |
+      v
+Authored dentro de IASI
+```
+
+El Sistema Inteligente puede haber producido las palabras, pero la autoridad de ingeniería procede de la adopción.
+
+## `External` habla de la frontera de autoridad
+
+`External` no significa remoto.
+
+Un artefacto externo puede estar físicamente copiado dentro del repositorio.
+
+Sigue siendo externo si su autoridad permanece fuera del proyecto.
+
+A la inversa, un artefacto creado internamente puede almacenarse en un servicio externo y seguir siendo autoritativo internamente.
+
+Ubicación física y autoridad metodológica son dimensiones diferentes.
+
+## `Inferred` habla del origen epistémico
+
+La información `Inferred` no ha sido afirmada explícitamente por la evidencia fuente.
+
+Ha sido razonada a partir de esa evidencia.
+
+Esta distinción es especialmente importante en ingeniería aumentada, porque los Sistemas Inteligentes producen continuamente afirmaciones útiles que pueden resultar plausibles, coherentes e incluso correctas sin ser autoritativas.
+
+IASI debe preservar la diferencia entre:
+
+```text
+afirmado
+inferido
+adoptado
+```
+
+No son estados intercambiables.
+
+## `Derived` habla de reproducibilidad
+
+Un artefacto `Derived` existe porque se ha aplicado una transformación a unas entradas.
+
+Su propiedad definitoria no es simplemente que una herramienta lo haya creado.
+
+La pregunta relevante es:
+
+> ¿Puede recrearse este artefacto a partir de fuentes y reglas conocidas?
+
+Si la respuesta es sí, las modificaciones manuales sobre el derivado deberían considerarse normalmente inestables.
+
+La corrección pertenece aguas arriba.
+
+## `Ephemeral` habla de temporalidad intencional
+
+Los artefactos `Ephemeral` soportan el trabajo sin convertirse en parte del cuerpo durable de conocimiento.
+
+Ejemplos:
+
+- cachés;
+- árboles temporales de renderizado;
+- prompts de trabajo;
+- cálculos intermedios;
+- directorios de staging.
+
+Efímero no significa irrelevante.
+
+Un artefacto temporal puede ser esencial durante una ejecución. Su característica definitoria es que la metodología no depende de conservarlo como verdad durable.
+
+## Combinaciones útiles
+
+El valor de un modelo multidimensional se hace visible en las combinaciones.
+
+### External + Durable
+
+Una copia local de una regulación externa conservada para trazabilidad.
+
+### Inferred + Ephemeral
+
+Una hipótesis temporal producida por un Sistema Inteligente durante un análisis.
+
+### Inferred + Adopted + Durable
+
+Una conclusión originalmente inferida por un Sistema Inteligente, revisada por un ingeniero y aceptada dentro de la especificación del proyecto.
+
+### Derived + Durable
+
+Un PDF de release conservado como artefacto de publicación aunque pueda regenerarse.
+
+### Derived + Ephemeral
+
+Un árbol HTML temporal creado durante un build.
+
+### Authored + Ephemeral
+
+Una nota humana de trabajo que todavía no ha sido adoptada dentro de la metodología durable.
+
+## Principio
+
+IASI debe modelar **propiedades**, no forzar cada artefacto dentro de una única caja.
+
+Un buen modelo semántico permite combinaciones y, al mismo tiempo, conserva las distinciones necesarias para autoridad, trazabilidad, regeneración, revisión y automatización.

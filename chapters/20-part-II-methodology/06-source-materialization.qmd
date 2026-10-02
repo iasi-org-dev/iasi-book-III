@@ -1,0 +1,150 @@
+---
+title: "De la fuente a la materialización"
+navbar-title: "Materialización"
+---
+
+IASI distingue la información fuente autoritativa de los artefactos producidos para consumo, publicación, ejecución o distribución.
+
+Esta separación permite que los outputs generados sigan siendo útiles sin convertirse accidentalmente en fuentes de verdad.
+
+## El flujo
+
+Un flujo simplificado es:
+
+```text
+artefactos fuente
+       |
+       v
+interpretación
+       |
+       v
+transformación
+       |
+       v
+materialización
+       |
+       v
+artefactos derivados
+```
+
+El conjunto de fuentes puede incluir información `Authored`, externa e inferida que haya sido aceptada.
+
+Los resultados materializados son normalmente derivados.
+
+## Fuente no significa `Authored`
+
+Un artefacto fuente es simplemente una entrada de un proceso.
+
+Puede ser:
+
+- creado internamente;
+- autoritativo externamente;
+- inferido y posteriormente adoptado;
+- otra fuente canónica.
+
+IASI debe preservar estas distinciones mientras procesa el conjunto como entradas.
+
+## Outputs derivados
+
+Entre los artefactos derivados materializados pueden encontrarse:
+
+- sitios HTML;
+- documentos PDF;
+- presentaciones;
+- diagramas generados;
+- releases empaquetadas;
+- esquemas generados;
+- manifiestos de despliegue;
+- árboles de publicación.
+
+Un artefacto derivado puede conservarse por motivos de distribución o históricos, pero su existencia no debería elevarlo silenciosamente a autoridad independiente.
+
+## El principio del serrín
+
+Los outputs de build y las áreas de staging son el **serrín** de la materialización.
+
+Son consecuencias útiles del trabajo, no la fuente del trabajo.
+
+Directorios como `_outputs` y `_publish` deben tratarse, por tanto, como regenerables y desechables.
+
+Su contenido anterior no debe determinar la materialización siguiente.
+
+Si la configuración actual solicita únicamente HTML, un PDF antiguo que permanezca en un directorio de trabajo no debe sobrevivir a la publicación por el mero hecho de existir de una ejecución previa.
+
+Mandan la fuente actual y la selección actual.
+
+## Reproducción limpia
+
+Un proceso de materialización sólido debe comportarse como si pudiera comenzar desde un estado derivado limpio.
+
+Conceptualmente:
+
+```text
+entradas autoritativas
+        +
+configuración actual
+        +
+reglas de transformación
+        |
+        v
+output actual completo
+```
+
+No:
+
+```text
+output antiguo
+      +
+algunos ficheros nuevos
+      +
+a cruzar los dedos
+```
+
+El segundo modelo permite que artefactos obsoletos se hagan pasar por resultados válidos.
+
+## Capas efímeras
+
+Algunos artefactos derivados existen únicamente para soportar el proceso.
+
+Por ejemplo:
+
+```text
+fuentes
+   |
+   v
+_outputs        <- derivado, regenerable
+   |
+   v
+_publish        <- derivado, regenerable
+   |
+   v
+release         <- artefacto derivado de publicación
+```
+
+Una release puede conservarse como registro durable, mientras que `_outputs` y `_publish` siguen siendo estructuras de trabajo descartables.
+
+Durabilidad y derivación son propiedades independientes.
+
+## La materialización debe respetar los metadatos
+
+Materializar no consiste únicamente en convertir ficheros.
+
+El proceso puede depender de semántica metodológica.
+
+Ejemplos:
+
+- el contenido externo puede requerir atribución;
+- el contenido inferido puede requerir enlaces a evidencias;
+- los artefactos obsoletos pueden quedar excluidos;
+- puede prohibirse utilizar artefactos derivados como entradas autoritativas;
+- los artefactos confidenciales pueden tener destinos restringidos;
+- los metadatos de versión pueden afectar a la publicación;
+- las relaciones pueden determinar orden o inclusión.
+
+Por eso los metadatos pertenecen al modelo IASI y no a un renderer concreto.
+
+## Principio
+
+**La fuente define la verdad; la materialización produce representaciones de esa verdad.**
+
+Los artefactos generados pueden ser importantes, distribuibles y durables. No deberían convertirse accidentalmente en la autoridad desde la que se reconstruye la metodología.

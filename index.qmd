@@ -11,19 +11,20 @@ IASI nació de una pregunta práctica: **¿cómo hacemos ingeniería cuando un S
 
 Responderla exige algo más que aprender a utilizar un modelo, un agente o una interfaz.
 
-Necesitamos saber qué información tiene autoridad, cómo se convierte en conocimiento operativo, qué trabajo puede ejecutarse, cómo se valida, qué estado puede aceptarse y qué ocurre cuando cambian las fuentes de las que dependía una decisión.
+Necesitamos saber qué información tiene autoridad, cómo se convierte en conocimiento operativo, cómo se define y representa el trabajo mediante tasks, cómo se ejecuta, cómo se valida, qué estado puede aceptarse y qué ocurre cuando cambian las fuentes de las que dependía una decisión.
 
 Este volumen describe esa metodología.
 
-No presenta una receta ligada a una herramienta concreta. Define un sistema de artefactos, responsabilidades, ciclos de vida, workflows, commands y adapters que permite trabajar sobre agentes y modelos diferentes conservando una semántica común.
+No presenta una receta ligada a una herramienta concreta. Define un sistema de artefactos, responsabilidades, tasks, ciclos de vida, workflows, commands y adapters que permite trabajar sobre agentes y modelos diferentes conservando una semántica común.
 
 La idea que atraviesa todo el volumen puede resumirse así:
 
 ```text
 metodología  → qué debe ocurrir
+task         → qué trabajo concreto debe realizarse
 estructura   → dónde vive
-workflow     → cómo se recorre
-command      → cómo se solicita
+workflow     → cómo se organiza y recorre el trabajo
+command      → cómo se solicita una operación
 adapter      → cómo se ejecuta en un entorno concreto
 ```
 
