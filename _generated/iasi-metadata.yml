@@ -62,5 +62,6 @@ book:
         - "chapters/70-part-VII-transversal/05-automations.qmd"
         - "chapters/70-part-VII-transversal/06-scope-precedence.qmd"
         - "chapters/70-part-VII-transversal/07-derived-author.qmd"
+    - part: "chapters/99-saco/index.qmd"
     - "back-matter/902-references.qmd"
     - "back-matter/903-licenses.qmd"
